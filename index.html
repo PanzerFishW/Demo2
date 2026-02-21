@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лесной Глэмпинг – отдых в гармонии с природой</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header id="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">Лесной<span>Глэмпинг</span></a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="catalog.html">Размещение</a></li>
+                <li><a href="activities.html">Развлечения</a></li>
+                <li><a href="nearby.html">Интересное рядом</a></li>
+                <li><a href="offers.html">Акции</a></li>
+                <li><a href="reviews-faq.html">Отзывы</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+            </ul>
+            <a href="tel:+79214567890" class="header-phone">+7 (921) 456-78-90</a>
+            <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
+
+    <div class="cookie-banner" id="cookieBanner">
+        <p>Мы используем файлы cookie для улучшения работы сайта. Продолжая использование, вы соглашаетесь с политикой конфиденциальности.</p>
+        <button id="acceptCookies">Принять</button>
+    </div>
+
+    <!-- Герой со слайд-шоу -->
+    <section class="hero-slideshow">
+        <div class="slideshow-container">
+            <div class="slide fade" style="background-image: url('images/glamping1.jpg');"></div>
+            <div class="slide fade" style="background-image: url('images/glamping2.jpg');"></div>
+            <div class="slide fade" style="background-image: url('images/glamping3.jpg');"></div>
+            <div class="slide fade" style="background-image: url('images/glamping4.jpg');"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Лесной Глэмпинг</h1>
+            <p>Дизайнерские шатры среди вековых сосен. Современный комфорт в объятиях дикой природы.</p>
+            <a href="catalog.html" class="btn">Посмотреть дома</a>
+        </div>
+    </section>
+
+    <!-- Плашка бронирования (прилипающая снизу) -->
+    <div class="booking-sticky" id="bookingSticky">
+        <div class="container">
+            <div class="booking-field" id="bookingDate">
+                <i class="fas fa-calendar-alt"></i>
+                <input type="text" id="dateRange" class="date-input" placeholder="Выберите даты" readonly>
+            </div>
+            <div class="booking-field booking-guests" id="bookingGuests">
+                <i class="fas fa-users"></i>
+                <span>2 гостя</span>
+                <div class="guests-dropdown" id="guestsDropdown">
+                    <div class="guest-row">
+                        <span>Взрослые</span>
+                        <div>
+                            <button class="guest-decr" data-type="adults">-</button>
+                            <span id="adultsCount">2</span>
+                            <button class="guest-incr" data-type="adults">+</button>
+                        </div>
+                    </div>
+                    <div class="guest-row">
+                        <span>Дети</span>
+                        <div>
+                            <button class="guest-decr" data-type="children">-</button>
+                            <span id="childrenCount">0</span>
+                            <button class="guest-incr" data-type="children">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="btn" id="bookingBtn">Забронировать</a>
+        </div>
+    </div>
+
+    <!-- Каталог домиков (краткий) -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-subtitle">Проживание</div>
+            <h2 class="section-title">НАШИ ШАТРЫ</h2>
+            <div class="rooms-preview">
+                <div class="room-preview-card">
+                    <img src="images/lesnoy.jpg" alt="Лесной">
+                    <h3>«Лесной»</h3>
+                    <p>от 12 000 ₽/ночь</p>
+                    <a href="catalog.html#lesnoy" class="btn-outline">Подробнее</a>
+                </div>
+                <div class="room-preview-card">
+                    <img src="images/family.jpg" alt="Семейный">
+                    <h3>«Семейный»</h3>
+                    <p>от 18 000 ₽/ночь</p>
+                    <a href="catalog.html#family" class="btn-outline">Подробнее</a>
+                </div>
+                <div class="room-preview-card">
+                    <img src="images/loft.jpg" alt="Лофт">
+                    <h3>«Лофт»</h3>
+                    <p>от 22 000 ₽/ночь</p>
+                    <a href="catalog.html#loft" class="btn-outline">Подробнее</a>
+                </div>
+            </div>
+            <div class="text-center" style="margin-top: 40px;">
+                <a href="catalog.html" class="btn">Смотреть все дома</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- О нас (сторителлинг) -->
+    <section class="about-section">
+        <div class="container">
+            <div class="section-subtitle">О нас</div>
+            <h2 class="section-title">Уникальный отдых в гармонии с природой</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Лесной Глэмпинг — это место, где современный комфорт встречается с нетронутой природой. На территории 15 гектаров расположены всего 8 домов, что гарантирует полное уединение.</p>
+                    <p>Мы создали пространство для тех, кто ценит тишину, свежий воздух и возможность отдохнуть от городской суеты. Каждый дом уникален: с камином или сауной, с панорамными окнами и собственной террасой.</p>
+                </div>
+                <div class="about-image">
+                    <img src="images/about.jpg" alt="О нас">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Дополнительные услуги и возможности -->
+    <section class="services-section">
+        <div class="container">
+            <div class="section-subtitle">Что мы предлагаем</div>
+            <h2 class="section-title">Услуги и удобства</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Фермерские продукты</h3>
+                    <p>Завтраки из местных продуктов и собственного огорода.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-hot-tub"></i>
+                    <h3>Баня и сауна</h3>
+                    <p>Настоящая русская баня и финская сауна на дровах.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-bicycle"></i>
+                    <h3>Велопрокат</h3>
+                    <p>Исследуйте окрестности на велосипедах.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-tree"></i>
+                    <h3>Экотропы</h3>
+                    <p>Прогулки по лесу, сбор грибов и ягод.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-water"></i>
+                    <h3>Водные развлечения</h3>
+                    <p>Сапы, рыбалка, пляж на Оке.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-fire"></i>
+                    <h3>Костровые зоны</h3>
+                    <p>Вечера у костра с гитарой и шашлыками.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Галерея (в стиле masonry) -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="section-subtitle">Фотогалерея</div>
+            <h2 class="section-title">Атмосфера нашего глэмпинга</h2>
+            <div class="gallery-grid">
+                <img src="images/gallery1.jpg" alt="Галерея 1">
+                <img src="images/gallery2.jpg" alt="Галерея 2">
+                <img src="images/gallery3.jpg" alt="Галерея 3">
+                <img src="images/gallery4.jpg" alt="Галерея 4">
+                <img src="images/gallery5.jpg" alt="Галерея 5">
+                <img src="images/gallery6.jpg" alt="Галерея 6">
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-subtitle">Часто задаваемые вопросы</div>
+            <h2 class="section-title">Ответы на вопросы</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">Как добраться до глэмпинга? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Мы находимся по адресу: г. Москва, ул. Юннатов 16А. Можно доехать на автомобиле или заказать трансфер от вокзала.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Какие условия бронирования? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Минимальное количество ночей – 2. Предоплата 30% при бронировании, остальное по приезде. Отмена бесплатно за 14 дней.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Можно ли с животными? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Да, в некоторых домах разрешено проживание с питомцами (уточняйте при бронировании).</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section class="contacts">
+        <div class="container">
+            <div class="section-subtitle">Контакты</div>
+            <h2 class="section-title">Как с нами связаться</h2>
+            <div class="contacts-grid">
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> +7 (921) 456-78-90</p>
+                    <p><i class="fas fa-envelope"></i> booking@lesglamping.ru</p>
+                    <p><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Юннатов 16А</p>
+                    <p><i class="fas fa-clock"></i> Заезд с 15:00, выезд до 12:00</p>
+                    <div class="legal-links">
+                        <a href="offer.html">Оферта</a>
+                        <a href="privacy.html">Политика конфиденциальности</a>
+                        <a href="cookies.html">Политика cookies</a>
+                    </div>
+                </div>
+                <div class="map">
+                    <iframe src="https://yandex.ru/map-widget/v1/?ll=37.555%2C55.665&z=17&pt=37.555,55.665,pm2rdm" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <a href="index.html" class="footer-logo">Лесной<span>Глэмпинг</span></a>
+                    <p>Уединённый отдых в окружении леса. 8 домов для полной приватности.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="catalog.html">Размещение</a></li>
+                        <li><a href="activities.html">Развлечения</a></li>
+                        <li><a href="nearby.html">Интересное рядом</a></li>
+                        <li><a href="offers.html">Акции</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="reviews-faq.html">Отзывы и FAQ</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                        <li><a href="offer.html">Оферта</a></li>
+                        <li><a href="privacy.html">Политика</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Лесной Глэмпинг. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/ru.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лесной Глэмпинг – Бронирование и оплата</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-green: #0f2415;
+            --deep-green: #1a3c24;
+            --forest-green: #2d5a3d;
+            --sage-green: #8a9b6e;
+            --light-sage: #b8c4a3;
+            --warm-brown: #5d4037;
+            --light-brown: #a1887f;
+            --sand-beige: #e6d5b8;
+            --cream: #f5f1ea;
+            --charcoal: #2d2d2d;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--charcoal);
+            background-color: var(--cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background-color: var(--sage-green);
+            color: var(--white);
+            border: 2px solid var(--sage-green);
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 40px;
+            transition: var(--transition);
+            cursor: pointer;
+            font-size: 16px;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: var(--forest-green);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--sage-green);
+            border: 2px solid var(--sage-green);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--sage-green);
+            color: var(--white);
+        }
+
+        /* ===== ХЕДЕР (как на главной) ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+            background-color: transparent;
+        }
+
+        header.scrolled {
+            background-color: rgba(13, 31, 19, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--sage-green);
+        }
+
+        .header-phone {
+            color: var(--white);
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid var(--white);
+            padding: 8px 20px;
+            border-radius: 40px;
+            transition: var(--transition);
+        }
+
+        .header-phone:hover {
+            background-color: var(--white);
+            color: var(--dark-green);
+        }
+
+        /* ===== ГЕРОЙ СЕКЦИЯ СТРАНИЦЫ БРОНИРОВАНИЯ ===== */
+        .booking-hero {
+            height: 30vh;
+            min-height: 200px;
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--deep-green) 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .booking-hero h1 {
+            font-size: 48px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .booking-hero h1:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--sage-green);
+        }
+
+        /* ===== МНОГОЭТАПНАЯ ФОРМА ===== */
+        .booking-steps {
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            background-color: var(--white);
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .steps-indicator {
+            display: flex;
+            background-color: var(--cream);
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--light-sage);
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            color: var(--charcoal);
+            opacity: 0.5;
+            transition: var(--transition);
+        }
+
+        .step.active {
+            opacity: 1;
+            font-weight: 600;
+        }
+
+        .step .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: var(--light-sage);
+            color: var(--white);
+            border-radius: 50%;
+            line-height: 30px;
+            margin-right: 10px;
+        }
+
+        .step.active .step-number {
+            background-color: var(--sage-green);
+        }
+
+        .step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            right: -20px;
+            width: 40px;
+            height: 1px;
+            background-color: var(--light-sage);
+        }
+
+        .step-content {
+            padding: 50px;
+            display: none;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        .step-content h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: var(--dark-green);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-green);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--light-sage);
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--sage-green);
+            box-shadow: 0 0 0 3px rgba(138, 155, 110, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .price-summary {
+            background-color: var(--cream);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+        }
+
+        .price-row.total {
+            border-top: 2px solid var(--light-sage);
+            margin-top: 10px;
+            padding-top: 15px;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--dark-green);
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .payment-methods img {
+            height: 30px;
+            opacity: 0.7;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        /* ===== ФУТЕР ===== */
+        footer {
+            background-color: var(--deep-green);
+            color: var(--white);
+            padding: 40px 0;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            .steps-indicator { flex-direction: column; gap: 15px; }
+            .step:not(:last-child):after { display: none; }
+            .form-row { grid-template-columns: 1fr; }
+            .step-content { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+<header id="header">
+    <div class="container header-inner">
+        <a href="index.html" class="logo">Лесной<span>Глэмпинг</span></a>
+        <a href="tel:+79214567890" class="header-phone">+7 (921) 456-78-90</a>
+    </div>
+</header>
+
+<!-- Герой страницы бронирования -->
+<section class="booking-hero">
+    <h1>Бронирование дома</h1>
+</section>
+
+<div class="container">
+    <div class="booking-steps">
+        <!-- Индикатор шагов -->
+        <div class="steps-indicator">
+            <div class="step active" data-step="1">
+                <span class="step-number">1</span> Выбор дома и дат
+            </div>
+            <div class="step" data-step="2">
+                <span class="step-number">2</span> Контактные данные
+            </div>
+            <div class="step" data-step="3">
+                <span class="step-number">3</span> Оплата
+            </div>
+        </div>
+
+        <!-- Шаг 1: Выбор дома и дат -->
+        <div class="step-content active" id="step1">
+            <h2>Выберите дом и даты проживания</h2>
+            <form id="step1Form">
+                <div class="form-group">
+                    <label for="room">Дом</label>
+                    <select id="room" name="room" class="form-control" required>
+                        <option value="" disabled selected>Выберите дом</option>
+                        <option value="lesnoy">«Лесной» (с камином) – 12 000 ₽/ночь</option>
+                        <option value="family">«Семейный» (с камином) – 18 000 ₽/ночь</option>
+                        <option value="loft">«Лофт» (с сауной) – 22 000 ₽/ночь</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="checkin">Дата заезда</label>
+                        <input type="date" id="checkin" name="checkin" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout">Дата выезда</label>
+                        <input type="date" id="checkout" name="checkout" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="adults">Взрослые</label>
+                        <input type="number" id="adults" name="adults" class="form-control" min="1" value="2" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="children">Дети</label>
+                        <input type="number" id="children" name="children" class="form-control" min="0" value="0">
+                    </div>
+                </div>
+                <div class="price-summary" id="pricePreviewStep1">
+                    <div class="price-row">
+                        <span>Стоимость за ночь:</span>
+                        <span id="pricePerNight">0 ₽</span>
+                    </div>
+                    <div class="price-row">
+                        <span>Количество ночей:</span>
+                        <span id="nightsCount">0</span>
+                    </div>
+                    <div class="price-row total">
+                        <span>Итого:</span>
+                        <span id="totalPrice">0 ₽</span>
+                    </div>
+                </div>
+                <div class="navigation-buttons">
+                    <div></div>
+                    <button type="button" class="btn" id="toStep2">Далее →</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Шаг 2: Контактные данные -->
+        <div class="step-content" id="step2">
+            <h2>Контактные данные</h2>
+            <form id="step2Form">
+                <div class="form-group">
+                    <label for="name">Ваше имя</label>
+                    <input type="text" id="name" name="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон</label>
+                    <input type="tel" id="phone" name="phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="comment">Комментарий (необязательно)</label>
+                    <textarea id="comment" name="comment" class="form-control" rows="4"></textarea>
+                </div>
+                <div class="navigation-buttons">
+                    <button type="button" class="btn btn-outline" id="backToStep1">← Назад</button>
+                    <button type="button" class="btn" id="toStep3">Далее →</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Шаг 3: Оплата -->
+        <div class="step-content" id="step3">
+            <h2>Оплата</h2>
+            <div class="price-summary" id="finalSummary">
+                <!-- Динамически заполняется -->
+            </div>
+            <div class="payment-methods">
+                <img src="https://cdn-icons-png.flaticon.com/512/196/196578.png" alt="Visa">
+                <img src="https://cdn-icons-png.flaticon.com/512/196/196561.png" alt="MasterCard">
+                <img src="https://cdn-icons-png.flaticon.com/512/196/196539.png" alt="Mir">
+                <img src="https://cdn-icons-png.flaticon.com/512/196/196565.png" alt="SberPay">
+            </div>
+            <p class="payment-note">Нажмите «Оплатить», чтобы перейти к защищённой форме оплаты. Предоплата 30% будет списана сразу.</p>
+            <form id="paymentForm">
+                <!-- Здесь можно добавить скрытые поля с данными -->
+                <div class="navigation-buttons">
+                    <button type="button" class="btn btn-outline" id="backToStep2">← Назад</button>
+                    <button type="submit" class="btn">Оплатить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2023 Лесной Глэмпинг. Все права защищены.</p>
+    </div>
+</footer>
+
+<script>
+    // Данные о домах
+    const rooms = {
+        lesnoy: { name: '«Лесной»', price: 12000 },
+        family: { name: '«Семейный»', price: 18000 },
+        loft: { name: '«Лофт»', price: 22000 }
+    };
+
+    // Элементы
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const step3 = document.getElementById('step3');
+    const steps = document.querySelectorAll('.step');
+    const stepContents = document.querySelectorAll('.step-content');
+
+    // Поля шага 1
+    const roomSelect = document.getElementById('room');
+    const checkinInput = document.getElementById('checkin');
+    const checkoutInput = document.getElementById('checkout');
+    const adultsInput = document.getElementById('adults');
+    const childrenInput = document.getElementById('children');
+    const pricePerNightSpan = document.getElementById('pricePerNight');
+    const nightsCountSpan = document.getElementById('nightsCount');
+    const totalPriceSpan = document.getElementById('totalPrice');
+
+    // Поля шага 2
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+    const commentInput = document.getElementById('comment');
+
+    // Кнопки навигации
+    const toStep2Btn = document.getElementById('toStep2');
+    const backToStep1 = document.getElementById('backToStep1');
+    const toStep3Btn = document.getElementById('toStep3');
+    const backToStep2 = document.getElementById('backToStep2');
+
+    // Функция переключения шага
+    function goToStep(stepNumber) {
+        steps.forEach((s, index) => {
+            if (index + 1 === stepNumber) {
+                s.classList.add('active');
+            } else {
+                s.classList.remove('active');
+            }
+        });
+        stepContents.forEach((content, index) => {
+            if (index + 1 === stepNumber) {
+                content.classList.add('active');
+            } else {
+                content.classList.remove('active');
+            }
+        });
+    }
+
+    // Функция получения выбранного дома
+    function getSelectedRoom() {
+        const val = roomSelect.value;
+        return rooms[val] || null;
+    }
+
+    // Функция расчёта ночей
+    function getNights() {
+        if (!checkinInput.value || !checkoutInput.value) return 0;
+        const start = new Date(checkinInput.value);
+        const end = new Date(checkoutInput.value);
+        return Math.round((end - start) / (1000 * 60 * 60 * 24));
+    }
+
+    // Обновление предпросмотра цены на шаге 1
+    function updatePricePreview() {
+        const room = getSelectedRoom();
+        const nights = getNights();
+        if (room && nights > 0) {
+            const total = room.price * nights;
+            pricePerNightSpan.textContent = room.price.toLocaleString() + ' ₽';
+            nightsCountSpan.textContent = nights;
+            totalPriceSpan.textContent = total.toLocaleString() + ' ₽';
+        } else {
+            pricePerNightSpan.textContent = '0 ₽';
+            nightsCountSpan.textContent = '0';
+            totalPriceSpan.textContent = '0 ₽';
+        }
+    }
+
+    roomSelect.addEventListener('change', updatePricePreview);
+    checkinInput.addEventListener('change', updatePricePreview);
+    checkoutInput.addEventListener('change', updatePricePreview);
+    adultsInput.addEventListener('input', updatePricePreview); // если хотим пересчитывать при изменении кол-ва гостей (на цену не влияет, но можно)
+    childrenInput.addEventListener('input', updatePricePreview);
+
+    // Валидация шага 1 перед переходом
+    toStep2Btn.addEventListener('click', () => {
+        if (!roomSelect.value) {
+            alert('Выберите дом');
+            return;
+        }
+        if (!checkinInput.value || !checkoutInput.value) {
+            alert('Выберите даты заезда и выезда');
+            return;
+        }
+        const nights = getNights();
+        if (nights <= 0) {
+            alert('Дата выезда должна быть позже даты заезда');
+            return;
+        }
+        // Можно сохранить данные в localStorage или просто передать в шаг 3 через DOM
+        goToStep(2);
+    });
+
+    backToStep1.addEventListener('click', () => {
+        goToStep(1);
+    });
+
+    // Переход на шаг 3 с заполнением финальной сводки
+    toStep3Btn.addEventListener('click', () => {
+        // Проверим заполнение контактов
+        if (!nameInput.value || !emailInput.value || !phoneInput.value) {
+            alert('Заполните все контактные данные');
+            return;
+        }
+        // Заполняем финальную сводку
+        const room = getSelectedRoom();
+        const nights = getNights();
+        const adults = parseInt(adultsInput.value) || 1;
+        const children = parseInt(childrenInput.value) || 0;
+        const total = room ? room.price * nights : 0;
+        const prepay = Math.round(total * 0.3);
+
+        const summaryHtml = `
+            <div class="price-row">
+                <span>Дом:</span>
+                <span>${room ? room.name : 'не выбран'}</span>
+            </div>
+            <div class="price-row">
+                <span>Даты:</span>
+                <span>${checkinInput.value} — ${checkoutInput.value}</span>
+            </div>
+            <div class="price-row">
+                <span>Гости:</span>
+                <span>${adults + children} (взрослых: ${adults}, детей: ${children})</span>
+            </div>
+            <div class="price-row">
+                <span>Количество ночей:</span>
+                <span>${nights}</span>
+            </div>
+            <div class="price-row">
+                <span>Стоимость за ночь:</span>
+                <span>${room ? room.price.toLocaleString() : 0} ₽</span>
+            </div>
+            <div class="price-row total">
+                <span>Итого:</span>
+                <span>${total.toLocaleString()} ₽</span>
+            </div>
+            <div class="price-row">
+                <span>Предоплата 30%:</span>
+                <span>${prepay.toLocaleString()} ₽</span>
+            </div>
+        `;
+        document.getElementById('finalSummary').innerHTML = summaryHtml;
+
+        goToStep(3);
+    });
+
+    backToStep2.addEventListener('click', () => {
+        goToStep(2);
+    });
+
+    // Обработка отправки формы оплаты (имитация)
+    document.getElementById('paymentForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Перенаправление на страницу оплаты... (имитация)');
+        // Здесь можно добавить реальную отправку данных на сервер и редирект на платёжный шлюз
+    });
+
+    // При загрузке страницы проверяем параметры URL (если пришли с главной)
+    (function initFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const checkin = urlParams.get('checkin');
+        const checkout = urlParams.get('checkout');
+        const adults = urlParams.get('adults');
+        const children = urlParams.get('children');
+        const roomType = urlParams.get('room_type');
+
+        if (checkin) checkinInput.value = checkin;
+        if (checkout) checkoutInput.value = checkout;
+        if (adults) adultsInput.value = adults;
+        if (children) childrenInput.value = children;
+        if (roomType && rooms[roomType]) {
+            roomSelect.value = roomType;
+        } else {
+            roomSelect.value = ''; // "Выберите дом"
+        }
+        updatePricePreview();
+    })();
+
+    // Фиксированный хедер
+    window.addEventListener('scroll', function() {
+        const header = document.getElementById('header');
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+</script>
+</body>
+</html>
