@@ -8,269 +8,1222 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Flatpickr CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="index.css">
+    <style>
+        :root {
+            --dark-green: #0f2415;
+            --deep-green: #1a3c24;
+            --forest-green: #2d5a3d;
+            --sage-green: #8a9b6e;
+            --light-sage: #b8c4a3;
+            --warm-brown: #5d4037;
+            --light-brown: #a1887f;
+            --sand-beige: #e6d5b8;
+            --cream: #f5f1ea;
+            --charcoal: #2d2d2d;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--charcoal);
+            background-color: var(--cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: var(--dark-green);
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--sage-green);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background-color: var(--sage-green);
+            color: var(--white);
+            border: 2px solid var(--sage-green);
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 40px;
+            transition: var(--transition);
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--sage-green);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--sage-green);
+            border: 2px solid var(--sage-green);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--sage-green);
+            color: var(--white);
+        }
+
+        /* ===== ХЕДЕР ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+            background-color: transparent;
+        }
+
+        header.scrolled {
+            background-color: rgba(13, 31, 19, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--sage-green);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-menu li {
+            margin-left: 30px;
+        }
+
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--sage-green);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .header-phone {
+            color: var(--white);
+            font-weight: 600;
+            margin-left: 30px;
+            text-decoration: none;
+            border: 1px solid var(--white);
+            padding: 8px 20px;
+            border-radius: 40px;
+            transition: var(--transition);
+        }
+
+        .header-phone:hover {
+            background-color: var(--white);
+            color: var(--dark-green);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            color: var(--white);
+            cursor: pointer;
+        }
+
+        /* ===== КУКИ ===== */
+        .cookie-banner {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            max-width: 400px;
+            background-color: var(--dark-green);
+            color: var(--white);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transform: translateY(200%);
+            transition: transform 0.5s ease;
+        }
+
+        .cookie-banner.show {
+            transform: translateY(0);
+        }
+
+        .cookie-banner p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .cookie-banner button {
+            background-color: var(--sage-green);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            align-self: flex-end;
+            transition: var(--transition);
+        }
+
+        .cookie-banner button:hover {
+            background-color: var(--light-sage);
+        }
+
+        /* ===== HERO ===== */
+        .hero-geometric {
+            height: 100vh;
+            position: relative;
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--deep-green) 100%);
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            margin-top: -40px;
+            padding-top: 160px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content-geometric {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-text-geometric {
+            color: var(--white);
+        }
+
+        .hero-text-geometric h1 {
+            font-size: 4.2rem;
+            margin-bottom: 30px;
+            line-height: 1.1;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-text-geometric h1:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 200px;
+            height: 4px;
+            background: var(--sage-green);
+            transform: skewX(-20deg);
+        }
+
+        .hero-text-geometric p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 500px;
+        }
+
+        .hero-image-geometric {
+            position: relative;
+            height: 500px;
+        }
+
+        .image-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(20% 0, 100% 0, 80% 100%, 0% 100%);
+            background: var(--light-sage);
+            overflow: hidden;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%) contrast(110%);
+        }
+
+        /* ===== ПЛАШКА БРОНИРОВАНИЯ (ПРИЛИПАЮЩАЯ СНИЗУ) ===== */
+        .booking-sticky {
+            position: fixed;
+            bottom: -100px;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            z-index: 999;
+            transition: bottom 0.4s ease;
+        }
+
+        .booking-sticky.show {
+            bottom: 0;
+        }
+
+        .booking-sticky .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .booking-field {
+            display: flex;
+            align-items: center;
+            background-color: var(--cream);
+            border-radius: 40px;
+            padding: 5px 15px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .booking-field i {
+            color: var(--sage-green);
+            margin-right: 10px;
+        }
+
+        .booking-field span {
+            font-weight: 500;
+        }
+
+        /* Стили для flatpickr-инпута внутри плашки */
+        .booking-field .date-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            width: 200px;
+            cursor: pointer;
+        }
+
+        .booking-field .date-input::placeholder {
+            color: var(--charcoal);
+            opacity: 0.7;
+        }
+
+        .booking-guests {
+            position: relative;
+        }
+
+        .guests-dropdown {
+            position: absolute;
+            bottom: 50px;
+            left: 0;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+            width: 250px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .guests-dropdown.active {
+            display: block;
+        }
+
+        .guest-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .guest-row button {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid var(--light-sage);
+            background: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .guest-row span {
+            font-weight: 600;
+        }
+
+        .price-preview {
+            margin-top: 15px;
+            font-size: 14px;
+            color: var(--dark-green);
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* ===== НАШИ ШАТРЫ ===== */
+        .rooms-smooth {
+            padding: 150px 0;
+            background: linear-gradient(135deg, #f9f5ee 0%, #f0e9dd 100%);
+            position: relative;
+        }
+
+        .rooms-container {
+            position: relative;
+        }
+
+        .room-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 100px;
+            align-items: center;
+            background: var(--white);
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+        }
+
+        .room-image-wrapper {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .room-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .room-card:hover .room-image-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .room-content {
+            padding: 60px;
+        }
+
+        .room-content h3 {
+            font-size: 2.5rem;
+            color: var(--dark-green);
+            margin-bottom: 20px;
+        }
+
+        .room-price {
+            display: inline-block;
+            background: var(--sage-green);
+            color: var(--white);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .room-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .room-feature {
+            background: var(--cream);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--dark-green);
+        }
+
+        /* ===== О НАС ===== */
+        .about-section {
+            background-color: var(--white);
+            padding: 100px 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-text p {
+            font-size: 17px;
+            margin-bottom: 25px;
+            color: var(--charcoal);
+            line-height: 1.8;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .feature-icon {
+            font-size: 22px;
+            color: var(--sage-green);
+            margin-right: 15px;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+
+        .feature-content h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .feature-content p {
+            font-size: 15px;
+            margin-bottom: 0;
+            opacity: 0.8;
+        }
+
+        .about-image {
+            position: relative;
+            height: 500px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.03);
+        }
+
+        /* ===== FAQ ===== */
+        .faq-grid {
+            max-width: 800px;
+            margin: 50px auto 0;
+        }
+
+        .faq-item {
+            background-color: var(--white);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .faq-question {
+            padding: 20px 25px;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 25px 20px 25px;
+            max-height: 200px;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* ===== КОНТАКТЫ ===== */
+        .contacts {
+            background-color: var(--dark-green);
+            color: var(--white);
+            padding: 100px 0;
+        }
+
+        .contacts .section-title,
+        .contacts .section-subtitle {
+            color: var(--white);
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info i {
+            width: 30px;
+            color: var(--sage-green);
+        }
+
+        .legal-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .legal-links a {
+            color: var(--light-sage);
+            text-decoration: underline;
+            font-size: 14px;
+        }
+
+        .map {
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* ===== ФУТЕР ===== */
+        footer {
+            background-color: var(--deep-green);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: block;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .footer-logo span {
+            color: var(--sage-green);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 20px;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--sage-green);
+        }
+
+        .footer-links h4 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--light-sage);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+        }
+
+        /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 1200px) {
+            .container { padding: 0 30px; }
+            .hero-text-geometric h1 { font-size: 3.5rem; }
+        }
+
+        @media (max-width: 992px) {
+            .hero-content-geometric { grid-template-columns: 1fr; }
+            .hero-image-geometric { height: 400px; }
+            .room-card { grid-template-columns: 1fr; }
+            .about-content { grid-template-columns: 1fr; }
+            .contacts-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .mobile-menu-btn { display: block; }
+            .header-phone { margin-left: 0; }
+            .hero-text-geometric h1 { font-size: 2.8rem; }
+            .section-title { font-size: 32px; }
+            .room-content { padding: 40px 30px; }
+            .room-content h3 { font-size: 2rem; }
+            .about-features { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 576px) {
+            .hero-text-geometric h1 { font-size: 2.2rem; }
+            .hero-text-geometric p { font-size: 1.1rem; }
+            .room-price { font-size: 1rem; }
+            .booking-field .date-input { width: 150px; }
+        }
+    </style>
 </head>
 <body>
-    <header id="header">
-        <div class="container header-inner">
-            <a href="index.html" class="logo">Лесной<span>Глэмпинг</span></a>
-            <ul class="nav-menu">
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="catalog.html">Размещение</a></li>
-                <li><a href="activities.html">Развлечения</a></li>
-                <li><a href="nearby.html">Интересное рядом</a></li>
-                <li><a href="offers.html">Акции</a></li>
-                <li><a href="reviews-faq.html">Отзывы</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
-            </ul>
-            <a href="tel:+79214567890" class="header-phone">+7 (921) 456-78-90</a>
-            <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
-        </div>
-    </header>
 
-    <div class="cookie-banner" id="cookieBanner">
-        <p>Мы используем файлы cookie для улучшения работы сайта. Продолжая использование, вы соглашаетесь с политикой конфиденциальности.</p>
-        <button id="acceptCookies">Принять</button>
+<header id="header">
+    <div class="container header-inner">
+        <a href="index.html" class="logo">Лесной<span>Глэмпинг</span></a>
+        <ul class="nav-menu">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="catalog.html">Размещение</a></li>
+            <li><a href="activities.html">Развлечения</a></li>
+            <li><a href="nearby.html">Интересное рядом</a></li>
+            <li><a href="offers.html">Акции</a></li>
+            <li><a href="reviews-faq.html">Отзывы</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+        </ul>
+        <a href="tel:+79214567890" class="header-phone">+7 (921) 456-78-90</a>
+        <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
     </div>
+</header>
 
-    <!-- Герой со слайд-шоу -->
-    <section class="hero-slideshow">
-        <div class="slideshow-container">
-            <div class="slide fade" style="background-image: url('images/glamping1.jpg');"></div>
-            <div class="slide fade" style="background-image: url('images/glamping2.jpg');"></div>
-            <div class="slide fade" style="background-image: url('images/glamping3.jpg');"></div>
-            <div class="slide fade" style="background-image: url('images/glamping4.jpg');"></div>
-        </div>
-        <div class="hero-content">
-            <h1>Лесной Глэмпинг</h1>
-            <p>Дизайнерские шатры среди вековых сосен. Современный комфорт в объятиях дикой природы.</p>
-            <a href="catalog.html" class="btn">Посмотреть дома</a>
-        </div>
-    </section>
+<div class="cookie-banner" id="cookieBanner">
+    <p>Мы используем файлы cookie для улучшения работы сайта. Продолжая использование, вы соглашаетесь с политикой конфиденциальности.</p>
+    <button id="acceptCookies">Принять</button>
+</div>
 
-    <!-- Плашка бронирования (прилипающая снизу) -->
-    <div class="booking-sticky" id="bookingSticky">
-        <div class="container">
-            <div class="booking-field" id="bookingDate">
-                <i class="fas fa-calendar-alt"></i>
-                <input type="text" id="dateRange" class="date-input" placeholder="Выберите даты" readonly>
+<!-- Герой -->
+<section class="hero-geometric">
+    <div class="container hero-content-geometric">
+        <div class="hero-text-geometric">
+            <h1>ГЛЭМПИНГ<br></h1>
+            <p>Дизайнерские шатры среди вековых сосен. Современный комфорт в объятиях дикой природы. Ваш творческий отдых от городской суеты начинается здесь.</p>
+            <a href="#booking" class="btn">Забронировать сейчас</a>
+        </div>
+        <div class="hero-image-geometric">
+            <div class="image-container">
+                <img src="test.jpg" alt="Глэмпинг в лесу">
             </div>
-            <div class="booking-field booking-guests" id="bookingGuests">
-                <i class="fas fa-users"></i>
-                <span>2 гостя</span>
-                <div class="guests-dropdown" id="guestsDropdown">
-                    <div class="guest-row">
-                        <span>Взрослые</span>
-                        <div>
-                            <button class="guest-decr" data-type="adults">-</button>
-                            <span id="adultsCount">2</span>
-                            <button class="guest-incr" data-type="adults">+</button>
-                        </div>
-                    </div>
-                    <div class="guest-row">
-                        <span>Дети</span>
-                        <div>
-                            <button class="guest-decr" data-type="children">-</button>
-                            <span id="childrenCount">0</span>
-                            <button class="guest-incr" data-type="children">+</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a href="#" class="btn" id="bookingBtn">Забронировать</a>
         </div>
     </div>
+</section>
 
-    <!-- Каталог домиков (краткий) -->
-    <section class="section-padding">
-        <div class="container">
-            <div class="section-subtitle">Проживание</div>
-            <h2 class="section-title">НАШИ ШАТРЫ</h2>
-            <div class="rooms-preview">
-                <div class="room-preview-card">
-                    <img src="images/lesnoy.jpg" alt="Лесной">
-                    <h3>«Лесной»</h3>
-                    <p>от 12 000 ₽/ночь</p>
-                    <a href="catalog.html#lesnoy" class="btn-outline">Подробнее</a>
-                </div>
-                <div class="room-preview-card">
-                    <img src="images/family.jpg" alt="Семейный">
-                    <h3>«Семейный»</h3>
-                    <p>от 18 000 ₽/ночь</p>
-                    <a href="catalog.html#family" class="btn-outline">Подробнее</a>
-                </div>
-                <div class="room-preview-card">
-                    <img src="images/loft.jpg" alt="Лофт">
-                    <h3>«Лофт»</h3>
-                    <p>от 22 000 ₽/ночь</p>
-                    <a href="catalog.html#loft" class="btn-outline">Подробнее</a>
-                </div>
-            </div>
-            <div class="text-center" style="margin-top: 40px;">
-                <a href="catalog.html" class="btn">Смотреть все дома</a>
-            </div>
+<!-- Плашка бронирования (прилипающая снизу) -->
+<div class="booking-sticky" id="bookingSticky">
+    <div class="container">
+        <div class="booking-field" id="bookingDate">
+            <i class="fas fa-calendar-alt"></i>
+            <input type="text" id="dateRange" class="date-input" placeholder="Выберите даты">
         </div>
-    </section>
-
-    <!-- О нас (сторителлинг) -->
-    <section class="about-section">
-        <div class="container">
-            <div class="section-subtitle">О нас</div>
-            <h2 class="section-title">Уникальный отдых в гармонии с природой</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Лесной Глэмпинг — это место, где современный комфорт встречается с нетронутой природой. На территории 15 гектаров расположены всего 8 домов, что гарантирует полное уединение.</p>
-                    <p>Мы создали пространство для тех, кто ценит тишину, свежий воздух и возможность отдохнуть от городской суеты. Каждый дом уникален: с камином или сауной, с панорамными окнами и собственной террасой.</p>
-                </div>
-                <div class="about-image">
-                    <img src="images/about.jpg" alt="О нас">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Дополнительные услуги и возможности -->
-    <section class="services-section">
-        <div class="container">
-            <div class="section-subtitle">Что мы предлагаем</div>
-            <h2 class="section-title">Услуги и удобства</h2>
-            <div class="services-grid">
-                <div class="service-item">
-                    <i class="fas fa-utensils"></i>
-                    <h3>Фермерские продукты</h3>
-                    <p>Завтраки из местных продуктов и собственного огорода.</p>
-                </div>
-                <div class="service-item">
-                    <i class="fas fa-hot-tub"></i>
-                    <h3>Баня и сауна</h3>
-                    <p>Настоящая русская баня и финская сауна на дровах.</p>
-                </div>
-                <div class="service-item">
-                    <i class="fas fa-bicycle"></i>
-                    <h3>Велопрокат</h3>
-                    <p>Исследуйте окрестности на велосипедах.</p>
-                </div>
-                <div class="service-item">
-                    <i class="fas fa-tree"></i>
-                    <h3>Экотропы</h3>
-                    <p>Прогулки по лесу, сбор грибов и ягод.</p>
-                </div>
-                <div class="service-item">
-                    <i class="fas fa-water"></i>
-                    <h3>Водные развлечения</h3>
-                    <p>Сапы, рыбалка, пляж на Оке.</p>
-                </div>
-                <div class="service-item">
-                    <i class="fas fa-fire"></i>
-                    <h3>Костровые зоны</h3>
-                    <p>Вечера у костра с гитарой и шашлыками.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Галерея (в стиле masonry) -->
-    <section class="gallery-section">
-        <div class="container">
-            <div class="section-subtitle">Фотогалерея</div>
-            <h2 class="section-title">Атмосфера нашего глэмпинга</h2>
-            <div class="gallery-grid">
-                <img src="images/gallery1.jpg" alt="Галерея 1">
-                <img src="images/gallery2.jpg" alt="Галерея 2">
-                <img src="images/gallery3.jpg" alt="Галерея 3">
-                <img src="images/gallery4.jpg" alt="Галерея 4">
-                <img src="images/gallery5.jpg" alt="Галерея 5">
-                <img src="images/gallery6.jpg" alt="Галерея 6">
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="section-padding">
-        <div class="container">
-            <div class="section-subtitle">Часто задаваемые вопросы</div>
-            <h2 class="section-title">Ответы на вопросы</h2>
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <div class="faq-question">Как добраться до глэмпинга? <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer">Мы находимся по адресу: г. Москва, ул. Юннатов 16А. Можно доехать на автомобиле или заказать трансфер от вокзала.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Какие условия бронирования? <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer">Минимальное количество ночей – 2. Предоплата 30% при бронировании, остальное по приезде. Отмена бесплатно за 14 дней.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Можно ли с животными? <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer">Да, в некоторых домах разрешено проживание с питомцами (уточняйте при бронировании).</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Контакты -->
-    <section class="contacts">
-        <div class="container">
-            <div class="section-subtitle">Контакты</div>
-            <h2 class="section-title">Как с нами связаться</h2>
-            <div class="contacts-grid">
-                <div class="contact-info">
-                    <p><i class="fas fa-phone"></i> +7 (921) 456-78-90</p>
-                    <p><i class="fas fa-envelope"></i> booking@lesglamping.ru</p>
-                    <p><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Юннатов 16А</p>
-                    <p><i class="fas fa-clock"></i> Заезд с 15:00, выезд до 12:00</p>
-                    <div class="legal-links">
-                        <a href="offer.html">Оферта</a>
-                        <a href="privacy.html">Политика конфиденциальности</a>
-                        <a href="cookies.html">Политика cookies</a>
+        <div class="booking-field booking-guests" id="bookingGuests">
+            <i class="fas fa-users"></i>
+            <span>2 гостя</span>
+            <div class="guests-dropdown" id="guestsDropdown">
+                <div class="guest-row">
+                    <span>Взрослые</span>
+                    <div>
+                        <button class="guest-decr" data-type="adults">-</button>
+                        <span id="adultsCount">2</span>
+                        <button class="guest-incr" data-type="adults">+</button>
                     </div>
                 </div>
-                <div class="map">
-                    <iframe src="https://yandex.ru/map-widget/v1/?ll=37.555%2C55.665&z=17&pt=37.555,55.665,pm2rdm" allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div>
-                    <a href="index.html" class="footer-logo">Лесной<span>Глэмпинг</span></a>
-                    <p>Уединённый отдых в окружении леса. 8 домов для полной приватности.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-vk"></i></a>
-                        <a href="#"><i class="fab fa-telegram"></i></a>
+                <div class="guest-row">
+                    <span>Дети</span>
+                    <div>
+                        <button class="guest-decr" data-type="children">-</button>
+                        <span id="childrenCount">0</span>
+                        <button class="guest-incr" data-type="children">+</button>
                     </div>
                 </div>
-                <div class="footer-links">
-                    <h4>Навигация</h4>
-                    <ul>
-                        <li><a href="catalog.html">Размещение</a></li>
-                        <li><a href="activities.html">Развлечения</a></li>
-                        <li><a href="nearby.html">Интересное рядом</a></li>
-                        <li><a href="offers.html">Акции</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h4>Информация</h4>
-                    <ul>
-                        <li><a href="reviews-faq.html">Отзывы и FAQ</a></li>
-                        <li><a href="contacts.html">Контакты</a></li>
-                        <li><a href="offer.html">Оферта</a></li>
-                        <li><a href="privacy.html">Политика</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 Лесной Глэмпинг. Все права защищены.</p>
             </div>
         </div>
-    </footer>
+        <a href="#" class="btn" id="bookingBtn">Забронировать</a>
+    </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://npmcdn.com/flatpickr/dist/l10n/ru.js"></script>
-    <script src="index.js"></script>
+<!-- Наши шатры -->
+<section class="rooms-smooth" id="rooms">
+    <div class="container rooms-container">
+        <div class="section-subtitle">Проживание</div>
+        <h2 class="section-title">НАШИ ШАТРЫ</h2>
+
+        <div class="room-card">
+            <div class="room-image-wrapper">
+                <img src="test.jpg" alt="Шатер «Лесной»">
+            </div>
+            <div class="room-content">
+                <h3>«Лесной»</h3>
+                <div class="room-price">от 12 000 ₽ / ночь</div>
+                <p>Палатка для двоих с панорамным окном, небольшой террасой и видом на озеро. Идеально для романтического побега.</p>
+                <div class="room-features">
+                    <span class="room-feature">King-size кровать</span>
+                    <span class="room-feature">Панорамные окна</span>
+                    <span class="room-feature">Частная терраса</span>
+                    <span class="room-feature">Вид на озеро</span>
+                </div>
+                <a href="booking.html?room_type=lesnoy" class="btn">Забронировать</a>
+            </div>
+        </div>
+
+        <div class="room-card" style="grid-template-columns: 1fr 1fr;">
+            <div class="room-content">
+                <h3>«Семейный»</h3>
+                <div class="room-price">от 18 000 ₽ / ночь</div>
+                <p>Двухкомнатная палатка с двумя двуспальными кроватями, отдельной зоной для детей и собственной костровой ямой.</p>
+                <div class="room-features">
+                    <span class="room-feature">2 спальни</span>
+                    <span class="room-feature">Детская зона</span>
+                    <span class="room-feature">Костровая яма</span>
+                    <span class="room-feature">Большая терраса</span>
+                </div>
+                <a href="booking.html?room_type=family" class="btn">Забронировать</a>
+            </div>
+            <div class="room-image-wrapper">
+                <img src="test.jpg" alt="Шатер «Семейный»">
+            </div>
+        </div>
+
+        <div class="room-card">
+            <div class="room-image-wrapper">
+                <img src="test.jpg" alt="Шатер «Лофт»">
+            </div>
+            <div class="room-content">
+                <h3>«Лофт»</h3>
+                <div class="room-price">от 22 000 ₽ / ночь</div>
+                <p>Стильный шатер в индустриальном стиле с высокими потолками, кирпичным акцентом и открытой планировкой. Для тех, кто ценит дизайн.</p>
+                <div class="room-features">
+                    <span class="room-feature">Высокие потолки</span>
+                    <span class="room-feature">Индустриальный стиль</span>
+                    <span class="room-feature">Открытая планировка</span>
+                    <span class="room-feature">Премиум отделка</span>
+                </div>
+                <a href="booking.html?room_type=loft" class="btn">Забронировать</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- О нас -->
+<section class="about-section">
+    <div class="container">
+        <div class="section-subtitle">О нашем глэмпинге</div>
+        <h2 class="section-title">Уникальный отдых в гармонии с природой</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Лесной Глэмпинг — это место, где современный комфорт встречается с нетронутой природой. На территории 15+ гектаров расположены всего 8 домов, что гарантирует полное уединение.</p>
+                <p>Мы создали пространство для тех, кто ценит тишину, свежий воздух и возможность отдохнуть от городской суеты. Каждый дом — уникален: с камином или сауной, с панорамными окнами и собственной террасой.</p>
+
+                <div class="about-features">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-leaf"></i></div>
+                        <div class="feature-content">
+                            <h3>Экологичность</h3>
+                            <p>Натуральные материалы и возобновляемые источники энергии</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-user-shield"></i></div>
+                        <div class="feature-content">
+                            <h3>Конфиденциальность</h3>
+                            <p>Большая территория обеспечивает полное уединение</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-utensils"></i></div>
+                        <div class="feature-content">
+                            <h3>Локальная кухня</h3>
+                            <p>Блюда из продуктов местных фермеров и собственного огорода</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-spa"></i></div>
+                        <div class="feature-content">
+                            <h3>Релаксация</h3>
+                            <p>Сауны, зоны отдыха, спа-процедуры на природе</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="test.jpg" alt="Интерьер дома">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="section-padding">
+    <div class="container">
+        <div class="section-subtitle">Часто задаваемые вопросы</div>
+        <h2 class="section-title">Ответы на вопросы</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <div class="faq-question">Как добраться до глэмпинга? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Мы находимся по адресу: г. Москва, ул. Юннатов 16А. Можно доехать на автомобиле или заказать трансфер от вокзала.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Какие условия бронирования? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Минимальное количество ночей – 2. Предоплата 30% при бронировании, остальное по приезде. Отмена бесплатно за 14 дней.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Можно ли с животными? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Да, в некоторых домах разрешено проживание с питомцами (уточняйте при бронировании).</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Контакты -->
+<section class="contacts">
+    <div class="container">
+        <div class="section-subtitle">Контакты</div>
+        <h2 class="section-title">Как с нами связаться</h2>
+        <div class="contacts-grid">
+            <div class="contact-info">
+                <p><i class="fas fa-phone"></i> +7 (921) 456-78-90</p>
+                <p><i class="fas fa-envelope"></i> booking@lesglamping.ru</p>
+                <p><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Юннатов 16А</p>
+                <p><i class="fas fa-clock"></i> Заезд с 15:00, выезд до 12:00</p>
+                <div class="legal-links">
+                    <a href="#" id="openOffer">Оферта</a>
+                    <a href="#" id="openPolicy">Политика конфиденциальности</a>
+                    <a href="#" id="openCookies">Политика cookies</a>
+                </div>
+            </div>
+            <div class="map">
+                <iframe src="https://yandex.ru/map-widget/v1/?ll=37.555%2C55.665&z=17&pt=37.555,55.665,pm2rdm" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Футер -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div>
+                <a href="index.html" class="footer-logo">Лесной<span>Глэмпинг</span></a>
+                <p>Уединённый отдых в окружении леса. 8 домов для полной приватности.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Навигация</h4>
+                <ul>
+                    <li><a href="catalog.html">Размещение</a></li>
+                    <li><a href="activities.html">Развлечения</a></li>
+                    <li><a href="nearby.html">Интересное рядом</a></li>
+                    <li><a href="offers.html">Акции</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Информация</h4>
+                <ul>
+                    <li><a href="reviews-faq.html">Отзывы и FAQ</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                    <li><a href="#" id="footerOffer">Оферта</a></li>
+                    <li><a href="#" id="footerPolicy">Политика</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Лесной Глэмпинг. Все права защищены.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Подключение flatpickr -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/ru.js"></script>
+
+<script>
+    // Фиксированный хедер
+    window.addEventListener('scroll', function() {
+        const header = document.getElementById('header');
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Куки-баннер
+    const cookieBanner = document.getElementById('cookieBanner');
+    const acceptBtn = document.getElementById('acceptCookies');
+    if (!localStorage.getItem('cookiesAccepted')) {
+        setTimeout(() => cookieBanner.classList.add('show'), 1000);
+    }
+    acceptBtn.addEventListener('click', () => {
+        localStorage.setItem('cookiesAccepted', 'true');
+        cookieBanner.classList.remove('show');
+    });
+
+    // Плашка бронирования (появляется при скролле)
+    const bookingSticky = document.getElementById('bookingSticky');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+            bookingSticky.classList.add('show');
+        } else {
+            bookingSticky.classList.remove('show');
+        }
+    });
+
+    // ==== Улучшенный выбор дат с flatpickr ====
+    const dateInput = document.getElementById('dateRange');
+    let selectedDates = { checkin: '', checkout: '' };
+
+    const fp = flatpickr(dateInput, {
+        mode: "range",
+        locale: "ru",
+        dateFormat: "d.m.Y",
+        minDate: "today",
+        showMonths: 2,
+        onClose: function(selectedDates, dateStr, instance) {
+            if (selectedDates.length === 2) {
+                // Форматируем для отображения
+                const start = instance.formatDate(selectedDates[0], "d.m.Y");
+                const end = instance.formatDate(selectedDates[1], "d.m.Y");
+                dateInput.value = `${start} – ${end}`;
+                // Сохраняем в машиночитаемом формате для передачи
+                selectedDates.checkin = instance.formatDate(selectedDates[0], "Y-m-d");
+                selectedDates.checkout = instance.formatDate(selectedDates[1], "Y-m-d");
+            } else {
+                selectedDates.checkin = '';
+                selectedDates.checkout = '';
+            }
+        }
+    });
+
+    // Гости
+    const bookingGuests = document.getElementById('bookingGuests');
+    const guestsDropdown = document.getElementById('guestsDropdown');
+    bookingGuests.addEventListener('click', (e) => {
+        e.stopPropagation();
+        guestsDropdown.classList.toggle('active');
+    });
+
+    let adults = 2, children = 0;
+    document.querySelectorAll('.guest-incr').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const type = btn.dataset.type;
+            if (type === 'adults') adults++;
+            if (type === 'children') children++;
+            updateGuests();
+        });
+    });
+    document.querySelectorAll('.guest-decr').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const type = btn.dataset.type;
+            if (type === 'adults' && adults > 1) adults--;
+            if (type === 'children' && children > 0) children--;
+            updateGuests();
+        });
+    });
+    function updateGuests() {
+        document.getElementById('adultsCount').textContent = adults;
+        document.getElementById('childrenCount').textContent = children;
+        document.querySelector('#bookingGuests span').textContent = `${adults + children} гост${adults+children === 1 ? 'ь' : 'я'}`;
+    }
+
+    // Закрытие дропдауна гостей при клике вне
+    document.addEventListener('click', () => {
+        guestsDropdown.classList.remove('active');
+    });
+
+    // Переход на страницу бронирования с параметрами
+    const bookingBtn = document.getElementById('bookingBtn');
+    bookingBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const params = new URLSearchParams();
+        if (selectedDates.checkin) params.append('checkin', selectedDates.checkin);
+        if (selectedDates.checkout) params.append('checkout', selectedDates.checkout);
+        params.append('adults', adults);
+        params.append('children', children);
+        window.location.href = 'booking.html?' + params.toString();
+    });
+
+    // FAQ
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const item = question.parentElement;
+            item.classList.toggle('active');
+        });
+    });
+
+    // Модальные окна (заглушки)
+    function openModal(id) {
+        alert('Документ откроется в новой вкладке (здесь заглушка)');
+    }
+    document.querySelectorAll('#openOffer, #footerOffer').forEach(el => {
+        el.addEventListener('click', (e) => { e.preventDefault(); openModal('offer'); });
+    });
+    document.querySelectorAll('#openPolicy, #footerPolicy').forEach(el => {
+        el.addEventListener('click', (e) => { e.preventDefault(); openModal('policy'); });
+    });
+    document.getElementById('openCookies')?.addEventListener('click', (e) => {
+        e.preventDefault(); openModal('cookies');
+    });
+
+    // Мобильное меню
+    const mobileBtn = document.querySelector('.mobile-menu-btn');
+    const navMenu = document.querySelector('.nav-menu');
+    mobileBtn.addEventListener('click', () => {
+        if (navMenu.style.display === 'flex') {
+            navMenu.style.display = 'none';
+        } else {
+            navMenu.style.display = 'flex';
+            navMenu.style.flexDirection = 'column';
+            navMenu.style.position = 'absolute';
+            navMenu.style.top = '100%';
+            navMenu.style.left = '0';
+            navMenu.style.width = '100%';
+            navMenu.style.backgroundColor = 'rgba(13, 31, 19, 0.98)';
+            navMenu.style.padding = '30px';
+        }
+    });
+
+    // При загрузке проверяем параметры URL (если перешли с уже выбранными датами)
+    (function initFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const checkin = urlParams.get('checkin');
+        const checkout = urlParams.get('checkout');
+        const adultsParam = urlParams.get('adults');
+        const childrenParam = urlParams.get('children');
+
+        if (checkin && checkout) {
+            // Преобразуем в формат flatpickr
+            const start = checkin.split('-').reverse().join('.');
+            const end = checkout.split('-').reverse().join('.');
+            dateInput.value = `${start} – ${end}`;
+            selectedDates.checkin = checkin;
+            selectedDates.checkout = checkout;
+            // Установить даты в flatpickr
+            fp.setDate([new Date(checkin), new Date(checkout)], false);
+        }
+        if (adultsParam) {
+            adults = parseInt(adultsParam);
+            document.getElementById('adultsCount').textContent = adults;
+        }
+        if (childrenParam) {
+            children = parseInt(childrenParam);
+            document.getElementById('childrenCount').textContent = children;
+        }
+        updateGuests();
+    })();
+</script>
 </body>
 </html>
