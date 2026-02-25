@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Политика конфиденциальности — Лесной Глэмпинг</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== БАЗОВЫЕ СТИЛИ (как в index.html) ===== */
+        :root {
+            --dark-green: #0f2415;
+            --deep-green: #1a3c24;
+            --forest-green: #2d5a3d;
+            --sage-green: #8a9b6e;
+            --light-sage: #b8c4a3;
+            --warm-brown: #5d4037;
+            --light-brown: #a1887f;
+            --sand-beige: #e6d5b8;
+            --cream: #f5f1ea;
+            --charcoal: #2d2d2d;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--charcoal);
+            background-color: var(--cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: var(--dark-green);
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--sage-green);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background-color: var(--sage-green);
+            color: var(--white);
+            border: 2px solid var(--sage-green);
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 40px;
+            transition: var(--transition);
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--sage-green);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--sage-green);
+            border: 2px solid var(--sage-green);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--sage-green);
+            color: var(--white);
+        }
+
+        /* Герой-секция (зелёная полоса) */
+        .page-hero {
+            height: 30vh;
+            min-height: 200px;
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--deep-green) 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-hero h1 {
+            font-size: 48px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--sage-green);
+        }
+
+        /* Адаптивность для мобильных */
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 32px;
+            }
+        }
+
+        /* Хедер */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+            background-color: transparent;
+        }
+
+        header.scrolled {
+            background-color: rgba(13, 31, 19, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--sage-green);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-menu li {
+            margin-left: 30px;
+        }
+
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--sage-green);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .header-phone {
+            color: var(--white);
+            font-weight: 600;
+            margin-left: 30px;
+            text-decoration: none;
+            border: 1px solid var(--white);
+            padding: 8px 20px;
+            border-radius: 40px;
+            transition: var(--transition);
+        }
+
+        .header-phone:hover {
+            background-color: var(--white);
+            color: var(--dark-green);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            color: var(--white);
+            cursor: pointer;
+        }
+
+        /* ===== КУКИ ===== */
+        .cookie-banner {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            max-width: 400px;
+            background-color: var(--dark-green);
+            color: var(--white);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transform: translateY(200%);
+            transition: transform 0.5s ease;
+        }
+
+        .cookie-banner.show {
+            transform: translateY(0);
+        }
+
+        .cookie-banner p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .cookie-banner button {
+            background-color: var(--sage-green);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            align-self: flex-end;
+            transition: var(--transition);
+        }
+
+        .cookie-banner button:hover {
+            background-color: var(--light-sage);
+        }
+
+        /* ===== ПЛАШКА БРОНИРОВАНИЯ ===== */
+        .booking-sticky {
+            position: fixed;
+            bottom: -100px;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            z-index: 999;
+            transition: bottom 0.4s ease;
+        }
+
+        .booking-sticky.show {
+            bottom: 0;
+        }
+
+        .booking-sticky .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .booking-field {
+            display: flex;
+            align-items: center;
+            background-color: var(--cream);
+            border-radius: 40px;
+            padding: 5px 15px;
+        }
+
+        .booking-field i {
+            color: var(--sage-green);
+            margin-right: 10px;
+        }
+
+        .booking-field span {
+            font-weight: 500;
+        }
+
+        .booking-guests {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .guests-dropdown {
+            position: absolute;
+            bottom: 50px;
+            left: 0;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+            width: 250px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .guests-dropdown.active {
+            display: block;
+        }
+
+        .guest-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .guest-row button {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid var(--light-sage);
+            background: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* ===== СТИЛИ ДЛЯ СТРАНИЦ С ДОКУМЕНТАМИ ===== */
+        .legal-page {
+            padding-top: 150px;
+            padding-bottom: 60px;
+        }
+
+        .legal-content {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+        }
+
+        .legal-content h2 {
+            font-size: 28px;
+            margin: 40px 0 20px;
+            color: var(--dark-green);
+        }
+
+        .legal-content h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .legal-content h3 {
+            font-size: 22px;
+            margin: 30px 0 15px;
+            color: var(--forest-green);
+        }
+
+        .legal-content p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .legal-content ul, .legal-content ol {
+            margin: 15px 0 25px 20px;
+        }
+
+        .legal-content li {
+            margin-bottom: 8px;
+        }
+
+        .legal-date {
+            color: var(--sage-green);
+            font-weight: 500;
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+        /* ===== ФУТЕР ===== */
+        footer {
+            background-color: var(--deep-green);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: block;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .footer-logo span {
+            color: var(--sage-green);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 20px;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--sage-green);
+        }
+
+        .footer-links h4 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--light-sage);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .mobile-menu-btn { display: block; }
+            .legal-content { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+<header id="header">
+    <div class="container header-inner">
+        <a href="index.html" class="logo">Лесной<span>Глэмпинг</span></a>
+        <ul class="nav-menu">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="catalog.html">Размещение</a></li>
+            <li><a href="activities.html">Развлечения</a></li>
+            <li><a href="nearby.html">Интересное рядом</a></li>
+            <li><a href="offers.html">Акции</a></li>
+            <li><a href="reviews-faq.html">Отзывы</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+        </ul>
+        <a href="tel:+79214567890" class="header-phone">+7 (921) 456-78-90</a>
+        <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
+    </div>
+</header>
+
+<div class="cookie-banner" id="cookieBanner">
+    <p>Мы используем файлы cookie для улучшения работы сайта. Продолжая использование, вы соглашаетесь с политикой конфиденциальности.</p>
+    <button id="acceptCookies">Принять</button>
+</div>
+
+<!-- Плашка бронирования -->
+<div class="booking-sticky" id="bookingSticky">
+    <div class="container">
+        <a href="booking.html" class="booking-field" id="bookingDate">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Выберите даты</span>
+        </a>
+        <div class="booking-field booking-guests" id="bookingGuests">
+            <i class="fas fa-users"></i>
+            <span>2 гостя</span>
+            <div class="guests-dropdown" id="guestsDropdown">
+                <div class="guest-row">
+                    <span>Взрослые</span>
+                    <div>
+                        <button class="guest-decr" data-type="adults">-</button>
+                        <span id="adultsCount">2</span>
+                        <button class="guest-incr" data-type="adults">+</button>
+                    </div>
+                </div>
+                <div class="guest-row">
+                    <span>Дети</span>
+                    <div>
+                        <button class="guest-decr" data-type="children">-</button>
+                        <span id="childrenCount">0</span>
+                        <button class="guest-incr" data-type="children">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="btn" id="bookingBtn">Забронировать</a>
+    </div>
+</div>
+
+<!-- ========== ОСНОВНОЙ КОНТЕНТ ========== -->
+<section class="page-hero">
+    <h1>Политика конфиденциальности</h1>
+</section>
+
+<section class="section-padding" style="padding-top: 0;">  <!-- Убираем лишний отступ -->
+    <div class="container">
+
+        <div class="legal-content">
+            <p class="legal-date">Редакция от 1 января 2026 года</p>
+
+            <h2>1. Общие положения</h2>
+            <p>1.1. Настоящая Политика обработки персональных данных (далее – Политика) разработана в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных» и определяет порядок обработки и защиты персональных данных пользователей сайта lesglamping.ru (далее – Сайт).</p>
+            <p>1.2. Используя Сайт, а также заполняя формы обратной связи, Пользователь выражает свое согласие с условиями настоящей Политики.</p>
+
+            <h2>2. Какие данные мы собираем</h2>
+            <p>2.1. <strong>Персональные данные, предоставляемые добровольно:</strong> имя, номер телефона, адрес электронной почты, данные банковской карты (платёж обрабатывается через защищённые сервисы, мы не храним реквизиты карт).</p>
+            <p>2.2. <strong>Данные, собираемые автоматически:</strong> IP-адрес, тип браузера, время посещения, страницы, которые открывает пользователь (с использованием cookie). Эти данные нужны для улучшения работы сайта и статистики.</p>
+
+            <h2>3. Цели обработки</h2>
+            <p>3.1. Обработка персональных данных осуществляется с целью:</p>
+            <ul>
+                <li>бронирования домов и предоставления услуг;</li>
+                <li>информирования о статусе бронирования, акциях и специальных предложениях (при согласии пользователя);</li>
+                <li>проведения статистических исследований и анализа работы сайта;</li>
+                <li>обеспечения безопасности и предотвращения мошенничества.</li>
+            </ul>
+
+            <h2>4. Правовые основания обработки</h2>
+            <p>4.1. Обработка осуществляется на основании договора (оферты) и согласия пользователя. Согласие может быть отозвано в любой момент путём направления письменного уведомления на электронную почту info@lesglamping.ru.</p>
+
+            <h2>5. Передача данных третьим лицам</h2>
+            <p>5.1. Мы не передаём персональные данные третьим лицам, за исключением случаев, предусмотренных законодательством РФ (например, по запросу правоохранительных органов) или для выполнения обязательств перед пользователем (например, передача данных платёжным партнёрам).</p>
+
+            <h2>6. Сроки хранения</h2>
+            <p>6.1. Персональные данные хранятся до тех пор, пока пользователь не отзовёт согласие или до момента достижения целей обработки, после чего уничтожаются.</p>
+
+            <h2>7. Защита данных</h2>
+            <p>7.1. Мы применяем организационные и технические меры для защиты персональных данных от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования и распространения.</p>
+
+            <h2>8. Использование cookie-файлов</h2>
+            <p>8.1. Сайт использует cookie-файлы. Продолжая пользоваться сайтом, пользователь соглашается на использование cookie. Вы можете отключить cookie в настройках браузера, однако это может повлиять на работу некоторых функций сайта.</p>
+
+            <h2>9. Права пользователей</h2>
+            <p>9.1. Пользователь имеет право на получение информации о том, какие его данные хранятся, а также требовать их уточнения, блокирования или уничтожения в случае, если данные являются неполными, устаревшими, неточными или обрабатываются с нарушением закона.</p>
+            <p>9.2. Для реализации своих прав необходимо направить запрос по электронной почте info@lesglamping.ru или заказным письмом по юридическому адресу.</p>
+
+            <h2>10. Контактная информация</h2>
+            <p>По всем вопросам, связанным с обработкой персональных данных, можно обращаться по email: info@lesglamping.ru или по телефону +7 (921) 456-78-90.</p>
+            <p>Наименование организации: ООО «Лесной Глэмпинг».</p>
+        </div>
+    </div>
+</section>
+
+<!-- Футер -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div>
+                <a href="index.html" class="footer-logo">Лесной<span>Глэмпинг</span></a>
+                <p>Уединённый отдых в окружении леса. 8 домов для полной приватности.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Навигация</h4>
+                <ul>
+                    <li><a href="catalog.html">Размещение</a></li>
+                    <li><a href="activities.html">Развлечения</a></li>
+                    <li><a href="nearby.html">Интересное рядом</a></li>
+                    <li><a href="offers.html">Акции</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Информация</h4>
+                <ul>
+                    <li><a href="reviews-faq.html">Отзывы и FAQ</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                    <li><a href="offer.html">Оферта</a></li>
+                    <li><a href="policy.html">Политика</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Лесной Глэмпинг. Все права защищены.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // ===== СКРИПТЫ (как в index.html) =====
+    window.addEventListener('scroll', function() {
+        const header = document.getElementById('header');
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    const cookieBanner = document.getElementById('cookieBanner');
+    const acceptBtn = document.getElementById('acceptCookies');
+    if (!localStorage.getItem('cookiesAccepted')) {
+        setTimeout(() => cookieBanner.classList.add('show'), 1000);
+    }
+    acceptBtn.addEventListener('click', () => {
+        localStorage.setItem('cookiesAccepted', 'true');
+        cookieBanner.classList.remove('show');
+    });
+
+    const bookingSticky = document.getElementById('bookingSticky');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+            bookingSticky.classList.add('show');
+        } else {
+            bookingSticky.classList.remove('show');
+        }
+    });
+
+    const bookingGuests = document.getElementById('bookingGuests');
+    const guestsDropdown = document.getElementById('guestsDropdown');
+    bookingGuests.addEventListener('click', (e) => {
+        e.stopPropagation();
+        guestsDropdown.classList.toggle('active');
+    });
+
+    let adults = 2, children = 0;
+    document.querySelectorAll('.guest-incr').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const type = btn.dataset.type;
+            if (type === 'adults') adults++;
+            if (type === 'children') children++;
+            updateGuests();
+        });
+    });
+    document.querySelectorAll('.guest-decr').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const type = btn.dataset.type;
+            if (type === 'adults' && adults > 1) adults--;
+            if (type === 'children' && children > 0) children--;
+            updateGuests();
+        });
+    });
+    function updateGuests() {
+        document.getElementById('adultsCount').textContent = adults;
+        document.getElementById('childrenCount').textContent = children;
+        document.querySelector('#bookingGuests span').textContent = `${adults + children} гост${adults+children === 1 ? 'ь' : 'я'}`;
+    }
+
+    document.addEventListener('click', () => {
+        guestsDropdown.classList.remove('active');
+    });
+
+    const bookingBtn = document.getElementById('bookingBtn');
+    bookingBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const params = new URLSearchParams();
+        params.append('adults', adults);
+        params.append('children', children);
+        window.location.href = 'booking.html?' + params.toString();
+    });
+
+    const mobileBtn = document.querySelector('.mobile-menu-btn');
+    const navMenu = document.querySelector('.nav-menu');
+    mobileBtn.addEventListener('click', () => {
+        if (navMenu.style.display === 'flex') {
+            navMenu.style.display = 'none';
+        } else {
+            navMenu.style.display = 'flex';
+            navMenu.style.flexDirection = 'column';
+            navMenu.style.position = 'absolute';
+            navMenu.style.top = '100%';
+            navMenu.style.left = '0';
+            navMenu.style.width = '100%';
+            navMenu.style.backgroundColor = 'rgba(13, 31, 19, 0.98)';
+            navMenu.style.padding = '30px';
+        }
+    });
+
+    (function initFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const adultsParam = urlParams.get('adults');
+        const childrenParam = urlParams.get('children');
+        if (adultsParam) {
+            adults = parseInt(adultsParam);
+            document.getElementById('adultsCount').textContent = adults;
+        }
+        if (childrenParam) {
+            children = parseInt(childrenParam);
+            document.getElementById('childrenCount').textContent = children;
+        }
+        updateGuests();
+    })();
+</script>
+
+</body>
+</html>

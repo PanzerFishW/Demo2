@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лесной Глэмпинг – Отзывы и вопросы</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* === Повторяем основные стили (можно вынести в общий CSS, но для простоты копируем) === */
+        :root {
+            --dark-green: #0f2415;
+            --deep-green: #1a3c24;
+            --forest-green: #2d5a3d;
+            --sage-green: #8a9b6e;
+            --light-sage: #b8c4a3;
+            --warm-brown: #5d4037;
+            --light-brown: #a1887f;
+            --sand-beige: #e6d5b8;
+            --cream: #f5f1ea;
+            --charcoal: #2d2d2d;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--charcoal);
+            background-color: var(--cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: var(--dark-green);
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--sage-green);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background-color: var(--sage-green);
+            color: var(--white);
+            border: 2px solid var(--sage-green);
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 40px;
+            transition: var(--transition);
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--sage-green);
+        }
+
+        /* Герой-секция (зелёная полоса) */
+        .page-hero {
+            height: 30vh;
+            min-height: 200px;
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--deep-green) 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-hero h1 {
+            font-size: 48px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--sage-green);
+        }
+
+        /* Адаптивность для мобильных */
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 32px;
+            }
+        }
+
+        /* Хедер */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+            background-color: transparent;
+        }
+
+        header.scrolled {
+            background-color: rgba(13, 31, 19, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--sage-green);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-menu li {
+            margin-left: 30px;
+        }
+
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--sage-green);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .header-phone {
+            color: var(--white);
+            font-weight: 600;
+            margin-left: 30px;
+            text-decoration: none;
+            border: 1px solid var(--white);
+            padding: 8px 20px;
+            border-radius: 40px;
+            transition: var(--transition);
+        }
+
+        .header-phone:hover {
+            background-color: var(--white);
+            color: var(--dark-green);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            color: var(--white);
+            cursor: pointer;
+        }
+
+        /* Блок отзывов */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .review-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .review-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .review-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--light-sage);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--white);
+            margin-right: 15px;
+        }
+
+        .review-author h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .review-date {
+            font-size: 14px;
+            color: var(--sage-green);
+        }
+
+        .review-rating {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+
+        .review-text {
+            font-size: 15px;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        /* FAQ (как на главной) */
+        .faq-grid {
+            max-width: 800px;
+            margin: 50px auto 0;
+        }
+
+        .faq-item {
+            background-color: var(--white);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .faq-question {
+            padding: 20px 25px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 25px 20px 25px;
+            max-height: 200px;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* Футер */
+        footer {
+            background-color: var(--deep-green);
+            color: var(--white);
+            padding: 50px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: block;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .footer-logo span {
+            color: var(--sage-green);
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 20px;
+            margin-right: 15px;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--sage-green);
+        }
+
+        .footer-links h4 {
+            margin-bottom: 20px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--light-sage);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .mobile-menu-btn { display: block; }
+            .header-phone { margin-left: 0; }
+            .reviews-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<header id="header">
+    <div class="container header-inner">
+        <a href="index.html" class="logo">Лесной<span>Глэмпинг</span></a>
+        <ul class="nav-menu">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="catalog.html">Размещение</a></li>
+            <li><a href="activities.html">Развлечения</a></li>
+            <li><a href="nearby.html">Интересное рядом</a></li>
+            <li><a href="offers.html">Акции</a></li>
+            <li><a href="reviews-faq.html">Отзывы</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+        </ul>
+        <a href="tel:+79214567890" class="header-phone">+7 (921) 456-78-90</a>
+        <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
+    </div>
+</header>
+
+<section class="page-hero">
+    <h1>Отзывы наших гостей</h1>
+</section>
+
+<section class="section-padding" style="padding-top: 0;">  <!-- Убираем лишний отступ -->
+    <div class="container">
+
+        <div class="reviews-grid">
+            <!-- Отзыв 1 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar"><i class="fas fa-user"></i></div>
+                    <div class="review-author">
+                        <h4>Анна</h4>
+                        <div class="review-date">август 2023</div>
+                    </div>
+                </div>
+                <div class="review-rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <div class="review-text">
+                    Отдыхали в «Лесном» с мужем. Восхитительный домик с панорамными окнами, очень чисто и уютно. Вечером сидели на террасе с видом на лес. Обязательно вернёмся!
+                </div>
+            </div>
+
+            <!-- Отзыв 2 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar"><i class="fas fa-user"></i></div>
+                    <div class="review-author">
+                        <h4>Сергей</h4>
+                        <div class="review-date">июль 2023</div>
+                    </div>
+                </div>
+                <div class="review-rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <div class="review-text">
+                    Отличное место для отдыха с семьёй. Детям очень понравилась площадка и животные на ферме. Взяли баню – отдельный кайф. Немного не хватило кондиционера в жару, но в целом отлично.
+                </div>
+            </div>
+
+            <!-- Отзыв 3 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar"><i class="fas fa-user"></i></div>
+                    <div class="review-author">
+                        <h4>Екатерина</h4>
+                        <div class="review-date">июнь 2023</div>
+                    </div>
+                </div>
+                <div class="review-rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <div class="review-text">
+                    Приезжали большой компанией, снимали два дома. Беседка вместила всех, мангал, чан – всё на уровне. Персонал приветливый, помогли с трансфером. Спасибо!
+                </div>
+            </div>
+
+            <!-- Отзыв 4 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar"><i class="fas fa-user"></i></div>
+                    <div class="review-author">
+                        <h4>Михаил</h4>
+                        <div class="review-date">май 2023</div>
+                    </div>
+                </div>
+                <div class="review-rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <div class="review-text">
+                    Любим это место за тишину и природу. В этот раз брали сапборды – покатались на реке. Кормят очень вкусно, особенно сыры собственного производства. Рекомендую!
+                </div>
+            </div>
+
+            <!-- Отзыв 5 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar"><i class="fas fa-user"></i></div>
+                    <div class="review-author">
+                        <h4>Ольга</h4>
+                        <div class="review-date">апрель 2023</div>
+                    </div>
+                </div>
+                <div class="review-rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <div class="review-text">
+                    Приезжали с подругой на выходные. Очень романтично, шатёр «Лофт» просто сказка. Вкусный завтрак на веранде, прогулки по лесу – полное перезагрузка.
+                </div>
+            </div>
+
+            <!-- Отзыв 6 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar"><i class="fas fa-user"></i></div>
+                    <div class="review-author">
+                        <h4>Дмитрий</h4>
+                        <div class="review-date">март 2023</div>
+                    </div>
+                </div>
+                <div class="review-rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <div class="review-text">
+                    Отличный вариант для зимнего отдыха. Домик тёплый, рядом лес, можно взять ватрушки. Вечером кинотеатр под открытым небом (с обогревателями) – неожиданно круто!
+                </div>
+            </div>
+        </div>
+
+        <!-- Блок FAQ (такой же как на главной, можно добавить ещё вопросы) -->
+        <div style="margin-top: 80px;">
+            <div class="section-subtitle">Часто задаваемые вопросы</div>
+            <h2 class="section-title">Ответы на вопросы</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">Как добраться до глэмпинга? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Мы находимся в Тульской области, в 70 км от Тулы и 30 км от Серпухова. Точный адрес: д. Бёхово, ул. Лесная, 1. Для гостей доступен трансфер от ж/д вокзала Серпухова (платно, по запросу).</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Какие условия бронирования? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Минимальное количество ночей – 2. Предоплата 30% при бронировании, остальное по приезде. Отмена бесплатно за 14 дней до заезда.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Можно ли с животными? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Да, в некоторых домах разрешено проживание с питомцами (уточняйте при бронировании). Дополнительная плата – 1000 руб./сутки.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Есть ли Wi-Fi? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Да, на всей территории глэмпинга работает бесплатный Wi-Fi.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div>
+                <a href="index.html" class="footer-logo">Лесной<span>Глэмпинг</span></a>
+                <p>Уединённый отдых в окружении леса. 8 домов для полной приватности.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Навигация</h4>
+                <ul>
+                    <li><a href="catalog.html">Размещение</a></li>
+                    <li><a href="activities.html">Развлечения</a></li>
+                    <li><a href="nearby.html">Интересное рядом</a></li>
+                    <li><a href="offers.html">Акции</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Информация</h4>
+                <ul>
+                    <li><a href="reviews-faq.html">Отзывы и FAQ</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                    <li><a href="offer.html">Оферта</a></li>
+                    <li><a href="policy.html">Политика</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Лесной Глэмпинг. Все права защищены.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Фиксированный хедер
+    window.addEventListener('scroll', function() {
+        const header = document.getElementById('header');
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // FAQ аккордеон
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const item = question.parentElement;
+            item.classList.toggle('active');
+        });
+    });
+
+    // Мобильное меню (аналогично главной)
+    const mobileBtn = document.querySelector('.mobile-menu-btn');
+    const navMenu = document.querySelector('.nav-menu');
+    mobileBtn.addEventListener('click', () => {
+        if (navMenu.style.display === 'flex') {
+            navMenu.style.display = 'none';
+        } else {
+            navMenu.style.display = 'flex';
+            navMenu.style.flexDirection = 'column';
+            navMenu.style.position = 'absolute';
+            navMenu.style.top = '100%';
+            navMenu.style.left = '0';
+            navMenu.style.width = '100%';
+            navMenu.style.backgroundColor = 'rgba(13, 31, 19, 0.98)';
+            navMenu.style.padding = '30px';
+        }
+    });
+</script>
+</body>
+</html>

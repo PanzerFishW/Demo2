@@ -81,7 +81,7 @@
             color: var(--white);
         }
 
-        /* ===== ХЕДЕР (как на главной) ===== */
+        /* Хедер */
         header {
             position: fixed;
             top: 0;
@@ -118,9 +118,44 @@
             color: var(--sage-green);
         }
 
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-menu li {
+            margin-left: 30px;
+        }
+
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--sage-green);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
         .header-phone {
             color: var(--white);
             font-weight: 600;
+            margin-left: 30px;
             text-decoration: none;
             border: 1px solid var(--white);
             padding: 8px 20px;
@@ -131,6 +166,13 @@
         .header-phone:hover {
             background-color: var(--white);
             color: var(--dark-green);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            color: var(--white);
+            cursor: pointer;
         }
 
         /* ===== ГЕРОЙ СЕКЦИЯ СТРАНИЦЫ БРОНИРОВАНИЯ ===== */
@@ -330,7 +372,17 @@
 <header id="header">
     <div class="container header-inner">
         <a href="index.html" class="logo">Лесной<span>Глэмпинг</span></a>
+        <ul class="nav-menu">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="catalog.html">Размещение</a></li>
+            <li><a href="activities.html">Развлечения</a></li>
+            <li><a href="nearby.html">Интересное рядом</a></li>
+            <li><a href="offers.html">Акции</a></li>
+            <li><a href="reviews-faq.html">Отзывы</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+        </ul>
         <a href="tel:+79214567890" class="header-phone">+7 (921) 456-78-90</a>
+        <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
     </div>
 </header>
 
@@ -461,7 +513,7 @@
 
 <footer>
     <div class="container">
-        <p>&copy; 2023 Лесной Глэмпинг. Все права защищены.</p>
+        <p>&copy; 2026 Лесной Глэмпинг. Все права защищены.</p>
     </div>
 </footer>
 

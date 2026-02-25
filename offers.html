@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Лесной Глэмпинг – отдых в гармонии с природой</title>
+    <title>Акции и спецпредложения — Лесной Глэмпинг</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* ===== ТОЧНО ТАКИЕ ЖЕ СТИЛИ, КАК В INDEX.HTML ===== */
         :root {
             --dark-green: #0f2415;
             --deep-green: #1a3c24;
@@ -101,7 +102,45 @@
             color: var(--white);
         }
 
-        /* ===== ХЕДЕР ===== */
+        /* Герой-секция (зелёная полоса) */
+        .page-hero {
+            height: 30vh;
+            min-height: 200px;
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--deep-green) 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-hero h1 {
+            font-size: 48px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--sage-green);
+        }
+
+        /* Адаптивность для мобильных */
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 32px;
+            }
+        }
+
+        /* Хедер */
         header {
             position: fixed;
             top: 0;
@@ -240,89 +279,7 @@
             background-color: var(--light-sage);
         }
 
-        /* ===== HERO ===== */
-        .hero {
-            height: 100vh;
-            position: relative;
-            background-color: var(--dark-green);
-            overflow: hidden;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-            margin-top: -40px;
-            display: flex;
-            align-items: center;
-        }
-
-        .slideshow {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            opacity: 0;
-            animation: slideShow 24s infinite;
-            background-image: url('test.jpg'); /* все слайды используют один тестовый фон */
-        }
-
-        .slide:nth-child(1) { animation-delay: 0s; }
-        .slide:nth-child(2) { animation-delay: 4s; }
-        .slide:nth-child(3) { animation-delay: 8s; }
-        .slide:nth-child(4) { animation-delay: 12s; }
-        .slide:nth-child(5) { animation-delay: 16s; }
-        .slide:nth-child(6) { animation-delay: 20s; }
-
-        @keyframes slideShow {
-            0% { opacity: 0; }
-            4% { opacity: 1; }
-            16% { opacity: 1; }
-            20% { opacity: 0; }
-            100% { opacity: 0; }
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(15,36,21,0.7) 0%, rgba(26,60,36,0.5) 100%);
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            color: var(--white);
-            max-width: 700px;
-        }
-
-        .hero-content h1 {
-            font-size: 4.2rem;
-            margin-bottom: 30px;
-            line-height: 1.1;
-        }
-
-        .hero-content p {
-            font-size: 1.3rem;
-            margin-bottom: 40px;
-            opacity: 0.9;
-        }
-
-        .hero-content .btn {
-            margin-right: 15px;
-        }
-
-        /* ===== ПЛАШКА БРОНИРОВАНИЯ (ПРИЛИПАЮЩАЯ СНИЗУ) ===== */
+        /* ===== ПЛАШКА БРОНИРОВАНИЯ ===== */
         .booking-sticky {
             position: fixed;
             bottom: -100px;
@@ -403,247 +360,120 @@
             font-size: 18px;
         }
 
-        .guest-row span {
-            font-weight: 600;
-        }
-
-        /* ===== НАШИ ДОМА (ИКОНКИ) ===== */
-        .houses-icons {
+        /* ===== КАРТОЧКИ ДЛЯ АКЦИЙ ===== */
+        .offers-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             margin-top: 50px;
         }
 
-        .house-icon-item {
-            text-align: center;
+        .offer-card {
             background: var(--white);
-            padding: 30px 20px;
             border-radius: 20px;
+            padding: 30px;
             box-shadow: var(--shadow);
             transition: var(--transition);
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--charcoal);
+            text-align: center;
         }
 
-        .house-icon-item:hover {
+        .offer-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
 
-        .house-icon-item i {
+        .offer-icon {
             font-size: 48px;
             color: var(--sage-green);
             margin-bottom: 20px;
         }
 
-        .house-icon-item h3 {
-            font-size: 20px;
+        .offer-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--dark-green);
+        }
+
+        .offer-card p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .offer-features {
+            list-style: none;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .offer-features li {
             margin-bottom: 10px;
-        }
-
-        .house-icon-item p {
-            font-size: 14px;
-            opacity: 0.8;
-        }
-
-        /* ===== О НАС ===== */
-        .about-section {
-            background-color: var(--white);
-            padding: 100px 0;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .about-text p {
-            font-size: 17px;
-            margin-bottom: 25px;
-            color: var(--charcoal);
-            line-height: 1.8;
-        }
-
-        .about-features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .feature-item {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
+            gap: 10px;
         }
 
-        .feature-icon {
-            font-size: 22px;
+        .offer-features i {
             color: var(--sage-green);
-            margin-right: 15px;
-            margin-top: 5px;
-            flex-shrink: 0;
+            width: 20px;
         }
 
-        .feature-content h3 {
-            font-size: 18px;
-            margin-bottom: 8px;
-            font-weight: 600;
+        .offer-price {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--forest-green);
+            margin: 20px 0;
         }
 
-        .feature-content p {
-            font-size: 15px;
-            margin-bottom: 0;
-            opacity: 0.8;
+        .offer-price small {
+            font-size: 16px;
+            font-weight: 400;
+            opacity: 0.7;
         }
 
-        .about-image {
-            position: relative;
-            height: 500px;
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .about-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s ease;
-        }
-
-        .about-image:hover img {
-            transform: scale(1.03);
-        }
-
-        /* ===== ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ ===== */
-        .services-grid {
+        /* Спецпредложения (три в ряд) */
+        .special-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
             margin-top: 50px;
         }
 
-        .service-item {
+        .special-item {
             background: var(--white);
-            padding: 30px 20px;
             border-radius: 20px;
-            text-align: center;
+            padding: 30px;
             box-shadow: var(--shadow);
             transition: var(--transition);
+            border: 2px solid transparent;
         }
 
-        .service-item:hover {
-            transform: translateY(-5px);
+        .special-item:hover {
+            border-color: var(--sage-green);
         }
 
-        .service-item i {
+        .special-item i {
             font-size: 40px;
             color: var(--sage-green);
             margin-bottom: 15px;
         }
 
-        .service-item h3 {
-            font-size: 18px;
+        .special-item h4 {
+            font-size: 20px;
             margin-bottom: 10px;
         }
 
-        .service-item p {
-            font-size: 14px;
-            opacity: 0.8;
-        }
-
-        /* ===== ГАЛЕРЕЯ ===== */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-top: 50px;
-        }
-
-        .gallery-item {
-            position: relative;
-            height: 250px;
-            overflow: hidden;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            cursor: pointer;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .gallery-item .overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+        .special-item .badge {
+            display: inline-block;
+            background-color: var(--sage-green);
             color: white;
-            padding: 20px;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
+            padding: 5px 15px;
+            border-radius: 40px;
+            font-size: 14px;
+            margin-top: 15px;
         }
 
-        .gallery-item:hover .overlay {
-            transform: translateY(0);
-        }
-
-        /* ===== FAQ ===== */
-        .faq-grid {
-            max-width: 800px;
-            margin: 50px auto 0;
-        }
-
-        .faq-item {
-            background-color: var(--white);
-            border-radius: 10px;
-            margin-bottom: 15px;
-            box-shadow: var(--shadow);
-        }
-
-        .faq-question {
-            padding: 20px 25px;
-            font-weight: 600;
-            cursor: pointer;
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-question i {
-            transition: transform 0.3s ease;
-        }
-
-        .faq-answer {
-            padding: 0 25px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-        }
-
-        .faq-item.active .faq-answer {
-            padding: 0 25px 20px 25px;
-            max-height: 200px;
-        }
-
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
-        }
-
-        /* ===== КОНТАКТЫ ===== */
+        /* ===== ФУТЕР (копия из index.html) ===== */
         .contacts {
             background-color: var(--dark-green);
             color: var(--white);
@@ -697,7 +527,6 @@
             border: 0;
         }
 
-        /* ===== ФУТЕР ===== */
         footer {
             background-color: var(--deep-green);
             color: var(--white);
@@ -770,31 +599,16 @@
             font-size: 14px;
         }
 
-        /* ===== АДАПТИВНОСТЬ ===== */
-        @media (max-width: 1200px) {
-            .container { padding: 0 30px; }
-            .hero-content h1 { font-size: 3.5rem; }
-            .houses-icons, .services-grid, .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
+        /* Адаптивность */
         @media (max-width: 992px) {
-            .about-content { grid-template-columns: 1fr; }
-            .contacts-grid { grid-template-columns: 1fr; }
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .special-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 768px) {
             .nav-menu { display: none; }
             .mobile-menu-btn { display: block; }
-            .header-phone { margin-left: 0; }
-            .hero-content h1 { font-size: 2.8rem; }
-            .section-title { font-size: 32px; }
-            .houses-icons, .services-grid, .gallery-grid { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 576px) {
-            .hero-content h1 { font-size: 2.2rem; }
-            .hero-content p { font-size: 1.1rem; }
+            .special-grid { grid-template-columns: 1fr; }
+            .contacts-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -822,34 +636,13 @@
     <button id="acceptCookies">Принять</button>
 </div>
 
-<!-- Hero со слайд-шоу (все слайды test.jpg) -->
-<section class="hero">
-    <div class="slideshow">
-        <div class="slide"></div>
-        <div class="slide"></div>
-        <div class="slide"></div>
-        <div class="slide"></div>
-        <div class="slide"></div>
-        <div class="slide"></div>
-    </div>
-    <div class="hero-overlay"></div>
-    <div class="container hero-content">
-        <h1>Лесной Глэмпинг</h1>
-        <p>Дизайнерские шатры среди вековых сосен. Современный комфорт в объятиях дикой природы. Ваш идеальный отдых от городской суеты начинается здесь.</p>
-        <a href="#houses" class="btn">Посмотреть дома</a>
-        <a href="#booking" class="btn btn-outline">Забронировать</a>
-    </div>
-</section>
-
 <!-- Плашка бронирования (прилипающая снизу) -->
 <div class="booking-sticky" id="bookingSticky">
     <div class="container">
-        <!-- Мини-календарь – декоративная кнопка для перехода на booking.html -->
         <a href="booking.html" class="booking-field" id="bookingDate">
             <i class="fas fa-calendar-alt"></i>
             <span>Выберите даты</span>
         </a>
-        <!-- Выбор гостей (реальный дропдаун) -->
         <div class="booking-field booking-guests" id="bookingGuests">
             <i class="fas fa-users"></i>
             <span>2 гостя</span>
@@ -872,179 +665,100 @@
                 </div>
             </div>
         </div>
-        <!-- Кнопка бронирования (переходит на booking.html с параметрами гостей) -->
         <a href="#" class="btn" id="bookingBtn">Забронировать</a>
     </div>
 </div>
 
-<!-- Наши дома (иконки) -->
-<section class="section-padding" id="houses">
-    <div class="container">
-        <div class="section-subtitle">Проживание</div>
-        <h2 class="section-title">НАШИ ДОМА</h2>
-        <div class="houses-icons">
-            <a href="catalog.html#lesnoy" class="house-icon-item">
-                <i class="fas fa-tree"></i>
-                <h3>«Лесной»</h3>
-                <p>Уютный шатёр для двоих с панорамным видом</p>
-            </a>
-            <a href="catalog.html#family" class="house-icon-item">
-                <i class="fas fa-users"></i>
-                <h3>«Семейный»</h3>
-                <p>Двухкомнатный шатёр с детской зоной</p>
-            </a>
-            <a href="catalog.html#loft" class="house-icon-item">
-                <i class="fas fa-couch"></i>
-                <h3>«Лофт»</h3>
-                <p>Стильное пространство с дизайнерским интерьером</p>
-            </a>
-            <a href="catalog.html#eco" class="house-icon-item">
-                <i class="fas fa-leaf"></i>
-                <h3>«Эко»</h3>
-                <p>Полное единение с природой и комфорт</p>
-            </a>
-        </div>
-    </div>
+<!-- ========== ОСНОВНОЙ КОНТЕНТ СТРАНИЦЫ АКЦИЙ ========== -->
+<section class="page-hero">
+    <h1>Акции и спецпредложения</h1>
 </section>
 
-<!-- О нас + сторителлинг -->
-<section class="about-section">
+<section class="section-padding" style="padding-top: 0;">  <!-- Убираем лишний отступ -->
     <div class="container">
-        <div class="section-subtitle">О нашем глэмпинге</div>
-        <h2 class="section-title">Уникальный отдых в гармонии с природой</h2>
-        <div class="about-content">
-            <div class="about-text">
-                <p>Лесной Глэмпинг — это место, где современный комфорт встречается с нетронутой природой. На территории 15 гектаров расположены всего 8 домов, что гарантирует полное уединение. Мы создали пространство для тех, кто ценит тишину, свежий воздух и возможность отдохнуть от городской суеты.</p>
-                <p>Каждый дом уникален: с камином или сауной, с панорамными окнами и собственной террасой. А ещё у нас есть собственная ферма, где мы сами производим сыры, яйца и овощи — всё это вы найдёте в нашем меню.</p>
-                <div class="about-features">
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-leaf"></i></div>
-                        <div class="feature-content">
-                            <h3>Экологичность</h3>
-                            <p>Натуральные материалы и возобновляемые источники энергии</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-user-shield"></i></div>
-                        <div class="feature-content">
-                            <h3>Конфиденциальность</h3>
-                            <p>Большая территория обеспечивает полное уединение</p>
-                        </div>
-                    </div>
+        
+        <!-- 1. Накопительная скидка -->
+        <div class="offers-grid">
+            <div class="offer-card">
+                <div class="offer-icon"><i class="fas fa-piggy-bank"></i></div>
+                <h3>Накопительная скидка</h3>
+                <p>Программа лояльности для наших гостей. С каждым новым бронированием ваша скидка растёт!</p>
+                <ul class="offer-features">
+                    <li><i class="fas fa-check-circle"></i> 1‑е бронирование — 3%</li>
+                    <li><i class="fas fa-check-circle"></i> 2‑е бронирование — 5%</li>
+                    <li><i class="fas fa-check-circle"></i> 3‑е бронирование — 7%</li>
+                    <li><i class="fas fa-check-circle"></i> От 4 бронирований — 10%</li>
+                </ul>
+                <p class="offer-price">до 10% <small>скидка</small></p>
+                <a href="catalog.html" class="btn btn-outline">Выбрать дом</a>
+            </div>
+
+            <!-- 2. Подарочный сертификат -->
+            <div class="offer-card">
+                <div class="offer-icon"><i class="fas fa-gift"></i></div>
+                <h3>Подарочный сертификат</h3>
+                <p>Идеальный подарок для близких — отдых в гармонии с природой.</p>
+                <ul class="offer-features">
+                    <li><i class="fas fa-check-circle"></i> Номинал от 5 000 до 50 000 ₽</li>
+                    <li><i class="fas fa-check-circle"></i> Срок действия 1 год</li>
+                    <li><i class="fas fa-check-circle"></i> Можно использовать частично</li>
+                    <li><i class="fas fa-check-circle"></i> Электронный или бумажный</li>
+                </ul>
+                <div class="offer-price">5 000 – 50 000 ₽</div>
+                <a href="contacts.html" class="btn btn-outline">Заказать</a>
+            </div>
+
+            <!-- 3. Дополнительная акция (например, "Приведи друга") -->
+            <div class="offer-card">
+                <div class="offer-icon"><i class="fas fa-user-friends"></i></div>
+                <h3>Приведи друга</h3>
+                <p>Рекомендуйте нас друзьям и получайте скидку на следующее бронирование.</p>
+                <ul class="offer-features">
+                    <li><i class="fas fa-check-circle"></i> Друг получает скидку 10%</li>
+                    <li><i class="fas fa-check-circle"></i> Вы получаете 5% на следующий заезд</li>
+                    <li><i class="fas fa-check-circle"></i> Акция суммируется с накопительной скидкой</li>
+                </ul>
+                <div class="offer-price">−5% <small>вам</small></div>
+                <a href="contacts.html" class="btn btn-outline">Подробнее</a>
+            </div>
+        </div>
+
+        <!-- 3. Специальные предложения (третья часть ТЗ, реализована отдельно) -->
+        <div style="margin-top: 80px;">
+            <div class="section-subtitle">Только сейчас</div>
+            <h2 class="section-title">Специальные предложения</h2>
+            <div class="special-grid">
+                <div class="special-item">
+                    <i class="fas fa-calendar-check"></i>
+                    <h4>Раннее бронирование</h4>
+                    <p>Забронируйте дом за 60 дней до заезда и получите скидку 15%.</p>
+                    <span class="badge">до 15%</span>
+                </div>
+                <div class="special-item">
+                    <i class="fas fa-birthday-cake"></i>
+                    <h4>Именинникам</h4>
+                    <p>Скидка 10% в течение недели до и после дня рождения (при предъявлении паспорта).</p>
+                    <span class="badge">−10%</span>
+                </div>
+                <div class="special-item">
+                    <i class="fas fa-fire"></i>
+                    <h4>Дольше — дешевле</h4>
+                    <p>При бронировании от 5 ночей — баня на дровах в подарок!</p>
+                    <span class="badge">Подарок</span>
                 </div>
             </div>
-            <div class="about-image">
-                <img src="test.jpg" alt="Интерьер дома">
-            </div>
+        </div>
+
+        <!-- Дополнительный блок: уточнение по акциям -->
+        <div style="margin-top: 60px; text-align: center; background: var(--white); padding: 40px; border-radius: 20px;">
+            <i class="fas fa-info-circle" style="font-size: 48px; color: var(--sage-green); margin-bottom: 20px;"></i>
+            <h3>Все акции можно комбинировать?</h3>
+            <p style="max-width: 700px; margin: 0 auto;">Некоторые предложения суммируются, другие — нет. Уточняйте подробности у менеджера при бронировании или по телефону <a href="tel:+79214567890" style="color: var(--sage-green); font-weight: 600;">+7 (921) 456-78-90</a>.</p>
         </div>
     </div>
 </section>
 
-<!-- Дополнительные услуги -->
-<section class="section-padding">
-    <div class="container">
-        <div class="section-subtitle">Развлечения</div>
-        <h2 class="section-title">Чем заняться</h2>
-        <div class="services-grid">
-            <div class="service-item">
-                <i class="fas fa-hot-tub"></i>
-                <h3>Баня</h3>
-                <p>Настоящая русская баня на дровах</p>
-            </div>
-            <div class="service-item">
-                <i class="fas fa-bicycle"></i>
-                <h3>Велопрокат</h3>
-                <p>Исследуйте окрестности на велосипеде</p>
-            </div>
-            <div class="service-item">
-                <i class="fas fa-apple-alt"></i>
-                <h3>Фермерские продукты</h3>
-                <p>Сыры, яйца, овощи с нашей фермы</p>
-            </div>
-            <div class="service-item">
-                <i class="fas fa-umbrella-beach"></i>
-                <h3>Большая беседка</h3>
-                <p>Для компаний до 20 человек</p>
-            </div>
-            <div class="service-item">
-                <i class="fas fa-water"></i>
-                <h3>Чан на дровах</h3>
-                <p>Горячая купель под открытым небом</p>
-            </div>
-            <div class="service-item">
-                <i class="fas fa-swimmer"></i>
-                <h3>Сапы и рыбалка</h3>
-                <p>Напрокат сапы, снасти для рыбалки</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Галерея (все изображения test.jpg) -->
-<section class="section-padding" style="background-color: var(--white);">
-    <div class="container">
-        <div class="section-subtitle">Фотографии</div>
-        <h2 class="section-title">ГАЛЕРЕЯ</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="test.jpg" alt="Домик в лесу">
-                <div class="overlay">Домик «Лесной»</div>
-            </div>
-            <div class="gallery-item">
-                <img src="test.jpg" alt="Костер">
-                <div class="overlay">Вечер у костра</div>
-            </div>
-            <div class="gallery-item">
-                <img src="test.jpg" alt="Сауна">
-                <div class="overlay">Финская сауна</div>
-            </div>
-            <div class="gallery-item">
-                <img src="test.jpg" alt="Завтрак на веранде">
-                <div class="overlay">Завтрак с видом</div>
-            </div>
-            <div class="gallery-item">
-                <img src="test.jpg" alt="Детская площадка">
-                <div class="overlay">Детский уголок</div>
-            </div>
-            <div class="gallery-item">
-                <img src="test.jpg" alt="Банный чан">
-                <div class="overlay">Чан на дровах</div>
-            </div>
-            <div class="gallery-item">
-                <img src="test.jpg" alt="Велопрогулка">
-                <div class="overlay">Велопрокат</div>
-            </div>
-            <div class="gallery-item">
-                <img src="test.jpg" alt="Зимний лес">
-                <div class="overlay">Зимняя сказка</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- FAQ -->
-<section class="section-padding">
-    <div class="container">
-        <div class="section-subtitle">Часто задаваемые вопросы</div>
-        <h2 class="section-title">Ответы на вопросы</h2>
-        <div class="faq-grid">
-            <div class="faq-item">
-                <div class="faq-question">Как добраться до глэмпинга? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Мы находимся в Тульской области, в 70 км от Тулы и 30 км от Серпухова. Точный адрес: д. Бёхово, ул. Лесная, 1. Для гостей доступен трансфер от ж/д вокзала Серпухова (платно, по запросу).</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Какие условия бронирования? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Минимальное количество ночей – 2. Предоплата 30% при бронировании, остальное по приезде. Отмена бесплатно за 14 дней до заезда.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Можно ли с животными? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Да, в некоторых домах разрешено проживание с питомцами (уточняйте при бронировании). Дополнительная плата – 1000 руб./сутки.</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Контакты -->
+<!-- Контакты (как на главной, но можно оставить для единообразия) -->
 <section class="contacts">
     <div class="container">
         <div class="section-subtitle">Контакты</div>
@@ -1107,6 +821,7 @@
 </footer>
 
 <script>
+    // ===== ТЕ ЖЕ СКРИПТЫ, ЧТО И В INDEX.HTML =====
     // Фиксированный хедер
     window.addEventListener('scroll', function() {
         const header = document.getElementById('header');
@@ -1128,7 +843,7 @@
         cookieBanner.classList.remove('show');
     });
 
-    // Плашка бронирования (появляется при скролле)
+    // Плашка бронирования
     const bookingSticky = document.getElementById('bookingSticky');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 500) {
@@ -1171,12 +886,10 @@
         document.querySelector('#bookingGuests span').textContent = `${adults + children} гост${adults+children === 1 ? 'ь' : 'я'}`;
     }
 
-    // Закрытие дропдауна гостей при клике вне
     document.addEventListener('click', () => {
         guestsDropdown.classList.remove('active');
     });
 
-    // Переход на страницу бронирования с параметрами
     const bookingBtn = document.getElementById('bookingBtn');
     bookingBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -1186,7 +899,7 @@
         window.location.href = 'booking.html?' + params.toString();
     });
 
-    // FAQ
+    // FAQ (не используется на этой странице, но оставлен для совместимости)
     document.querySelectorAll('.faq-question').forEach(question => {
         question.addEventListener('click', () => {
             const item = question.parentElement;
@@ -1212,12 +925,10 @@
         }
     });
 
-    // При загрузке проверяем параметры URL (если перешли с уже выбранными гостями)
     (function initFromUrl() {
         const urlParams = new URLSearchParams(window.location.search);
         const adultsParam = urlParams.get('adults');
         const childrenParam = urlParams.get('children');
-
         if (adultsParam) {
             adults = parseInt(adultsParam);
             document.getElementById('adultsCount').textContent = adults;
@@ -1230,7 +941,6 @@
     })();
 </script>
 
-<!-- Пояснение: все изображения заменены на test.jpg для тестирования. 
-     Для работы слайд-шоу достаточно одного файла test.jpg в корне. -->
+<!-- Все изображения используют test.jpg для тестирования -->
 </body>
 </html>
